@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
-import { useLoader } from '@react-three/fiber'
+import { useLoader, Vector3 } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { Vector3 } from 'three';
 
 export type BlockProps = {
     id: string;

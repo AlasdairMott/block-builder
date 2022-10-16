@@ -1,54 +1,68 @@
 import * as THREE from 'three'
 import React, { useRef, useState } from 'react'
-import { ThreeElements } from '@react-three/fiber'
+import { ThreeElements, ThreeEvent, Vector3 } from '@react-three/fiber'
+import { Block } from './Block';
+import { Model } from './Model';
+
 
 type InteractiveProps = ThreeElements['mesh'] & {
     geo: JSX.Element;
     color?: string | THREE.Color;
+    locked: boolean;
+    blockClicked: (e: {blockId: string; position: Vector3}) => void;
+    blockId: string;
 }
 
 export function InteractiveGeometry(props: InteractiveProps) {
 
     const ref = useRef<THREE.Mesh>(null!)
 
-    const [active, setActive] = useState(false)
-    const [hovered, setHover] = useState(false)
+    const [locked, setLocked] = useState(props.locked);
+    const [active, setActive] = useState(false);
+    const [hovered, setHover] = useState(false);
 
-    const clickHandler = (e: any) => {
+    const clickHandler = (e: ThreeEvent<MouseEvent>) => {
         setActive(!active);
+        // props.blockClicked({
+        //     blockId:props.blockId?.toString()!,
+        //     position: props.position!
+        // });
     }
 
-    const pointerOverHandler = () => {
+    const pointerOverHandler = (e: ThreeEvent<PointerEvent>) => {
         setHover(true);
     }
 
-    const pointerOutHandler = () => {
+    const pointerOutHandler = (e: ThreeEvent<PointerEvent>) => {
         setHover(false);
     }
-    const color = hovered ? 'hotpink' : (props.color ? props.color : 'orange');
 
-    let vector = new THREE.Vector3(0,0,0);
-    vector.copy(props.position as THREE.Vector3);
-    if (active) {
-        vector.y += 1;
-    }
-    // const up = (props.position ? (props.position as THREE.Vector3).copy() : new THREE.Vector3(0,0,0));
-    // if (active){
-    //     up.y += 1.0;
-    // }
+    let color;
+    if (locked) {
+        color = '#D3D3D3'
+    } else if (hovered) {
+        color = 'yellow'
+    } else if (active) {
+        color = 'cyan'
+    } else {
+        color = props.color;
+    };
 
-    // console.log(up)
-
+    // const opacity = hovered ? 1.0 : 0.0;
+    const opacity =0.6;
     return (
         <mesh
             {...props}
-            position={vector}
+            visible={hovered || active}
+            position={props.position}
             ref={ref}
             onClick={clickHandler}
             onPointerOver={pointerOverHandler}
             onPointerOut={pointerOutHandler}>
-                {props.geo}
-                <meshStandardMaterial attach="material" color={color}/>
+                {!locked && !active && props.geo}
+                {/* {active && <Block id={props.blockId} position={p} rotation={0} />} */}
+                {active && <Model/>}
+                <meshStandardMaterial attach="material" color={color} transparent={true} opacity={opacity}/>
         </mesh>
     );
 };
