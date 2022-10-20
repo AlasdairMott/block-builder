@@ -596,8 +596,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 1,
             "point": [
-              134.54,
-              392.48
+              89.4,
+              372.41
             ],
             "rotation": 0,
             "style": {
@@ -858,8 +858,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 2,
             "point": [
-              141.36,
-              445.2
+              96.22,
+              425.13
             ],
             "rotation": 0,
             "style": {
@@ -1045,8 +1045,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 3,
             "point": [
-              22.25,
-              417.92
+              -22.89,
+              397.85
             ],
             "rotation": 0,
             "style": {
@@ -1327,8 +1327,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 4,
             "point": [
-              18.1,
-              417.91
+              -27.04,
+              397.84
             ],
             "rotation": 0,
             "style": {
@@ -1459,8 +1459,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 5,
             "point": [
-              20.04,
-              472.33
+              -25.1,
+              452.26
             ],
             "rotation": 0,
             "style": {
@@ -1741,8 +1741,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 6,
             "point": [
-              137.16,
-              487.52
+              92.02,
+              467.45
             ],
             "rotation": 0,
             "style": {
@@ -1888,8 +1888,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 7,
             "point": [
-              136.41,
-              488.53
+              91.27,
+              468.46
             ],
             "rotation": 0,
             "style": {
@@ -2165,8 +2165,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 8,
             "point": [
-              267.34,
-              447.35
+              222.2,
+              427.28
             ],
             "rotation": 0,
             "style": {
@@ -2362,8 +2362,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 9,
             "point": [
-              110.02,
-              400.31
+              64.88,
+              380.24
             ],
             "rotation": 0,
             "style": {
@@ -2574,8 +2574,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 10,
             "point": [
-              220.51,
-              453.19
+              175.37,
+              433.12
             ],
             "rotation": 0,
             "style": {
@@ -2676,8 +2676,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 11,
             "point": [
-              170.4,
-              471
+              125.26,
+              450.93
             ],
             "rotation": 0,
             "style": {
@@ -2768,8 +2768,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 12,
             "point": [
-              97.45,
-              471.17
+              52.31,
+              451.1
             ],
             "rotation": 0,
             "style": {
@@ -2835,8 +2835,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 13,
             "point": [
-              59.44,
-              451.24
+              14.3,
+              431.17
             ],
             "rotation": 0,
             "style": {
@@ -2922,8 +2922,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 14,
             "point": [
-              109.76,
-              424.02
+              64.62,
+              403.95
             ],
             "rotation": 0,
             "style": {
@@ -3104,8 +3104,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 15,
             "point": [
-              65.32,
-              418.52
+              20.18,
+              398.45
             ],
             "rotation": 0,
             "style": {
@@ -3266,8 +3266,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 16,
             "point": [
-              26.43,
-              367.11
+              -18.71,
+              347.04
             ],
             "rotation": 0,
             "style": {
@@ -3423,8 +3423,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 17,
             "point": [
-              26.42,
-              412.78
+              -18.72,
+              392.71
             ],
             "rotation": 0,
             "style": {
@@ -3520,8 +3520,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 18,
             "point": [
-              61.59,
-              427.7
+              16.45,
+              407.63
             ],
             "rotation": 0,
             "style": {
@@ -3622,8 +3622,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 19,
             "point": [
-              105.07,
-              368.64
+              59.93,
+              348.57
             ],
             "rotation": 0,
             "style": {
@@ -3734,8 +3734,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 20,
             "point": [
-              59.85,
-              363.8
+              14.71,
+              343.73
             ],
             "rotation": 0,
             "style": {
@@ -3841,8 +3841,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 21,
             "point": [
-              29.71,
-              354.38
+              -15.43,
+              334.31
             ],
             "rotation": 0,
             "style": {
@@ -4023,8 +4023,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 22,
             "point": [
-              28.99,
-              353.57
+              -16.15,
+              333.5
             ],
             "rotation": 0,
             "style": {
@@ -4205,8 +4205,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 23,
             "point": [
-              71.5,
-              353.36
+              26.36,
+              333.29
             ],
             "rotation": 0,
             "style": {
@@ -4382,8 +4382,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 24,
             "point": [
-              100.97,
-              437.48
+              55.83,
+              417.41
             ],
             "rotation": 0,
             "style": {
@@ -4634,8 +4634,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 25,
             "point": [
-              69.95,
-              372.46
+              24.81,
+              352.39
             ],
             "rotation": 0,
             "style": {
@@ -4826,8 +4826,8 @@
             "parentId": "d728b79d-7242-48f9-1c15-d26273a22bd9",
             "childIndex": 26,
             "point": [
-              125.58,
-              395.67
+              80.44,
+              375.6
             ],
             "rotation": 0,
             "style": {
@@ -4988,11 +4988,11 @@
             "parentId": "page",
             "childIndex": 11,
             "point": [
-              18.1,
-              353.36
+              -27.04,
+              333.29
             ],
             "size": [
-              257.9274652389939,
+              257.92746523899393,
               178.3250833804409
             ],
             "rotation": 0,
