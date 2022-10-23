@@ -244,8 +244,8 @@
             "parentId": "page",
             "childIndex": 5,
             "point": [
-              697.9,
-              471.47
+              620.29,
+              562.21
             ],
             "size": [
               119.12,
@@ -272,7 +272,7 @@
             "parentId": "page",
             "childIndex": 6,
             "point": [
-              783.86,
+              712.71,
               400.96
             ],
             "rotation": 0,
@@ -282,7 +282,7 @@
                 "id": "start",
                 "index": 0,
                 "point": [
-                  28.82,
+                  95.58,
                   0
                 ],
                 "canBind": true,
@@ -293,7 +293,7 @@
                 "index": 1,
                 "point": [
                   0,
-                  54.51
+                  145.25
                 ],
                 "canBind": true,
                 "bindingId": "8e884f7d-2b54-45d0-3a87-f3eea8610d34"
@@ -302,8 +302,8 @@
                 "id": "bend",
                 "index": 2,
                 "point": [
-                  14.41,
-                  27.26
+                  47.79,
+                  72.63
                 ]
               }
             },
@@ -568,8 +568,8 @@
             "parentId": "page",
             "childIndex": 3,
             "point": [
-              525.97,
-              473.05
+              449.19,
+              521.98
             ],
             "size": [
               159.77,
@@ -5227,6 +5227,34 @@
               0.5,
               0.5
             ]
+          },
+          "9854019e-8a30-4955-0342-5ec69abc7ed3": {
+            "id": "9854019e-8a30-4955-0342-5ec69abc7ed3",
+            "type": "rectangle",
+            "name": "Rectangle",
+            "parentId": "page",
+            "childIndex": 6,
+            "point": [
+              497.47,
+              562.76
+            ],
+            "size": [
+              119.12,
+              67.86
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "label": "faces",
+            "labelPoint": [
+              0.5,
+              0.5
+            ]
           }
         },
         "bindings": {
@@ -5351,6 +5379,13 @@
             "distance": 16
           }
         }
+      },
+      "16678eff-cd93-42fc-2eac-63dfd587707b": {
+        "id": "16678eff-cd93-42fc-2eac-63dfd587707b",
+        "name": "Page 2",
+        "childIndex": 2,
+        "shapes": {},
+        "bindings": {}
       }
     },
     "pageStates": {
@@ -5361,6 +5396,17 @@
           "point": [
             0,
             0
+          ],
+          "zoom": 1
+        }
+      },
+      "16678eff-cd93-42fc-2eac-63dfd587707b": {
+        "id": "16678eff-cd93-42fc-2eac-63dfd587707b",
+        "selectedIds": [],
+        "camera": {
+          "point": [
+            -781.5,
+            -454.5
           ],
           "zoom": 1
         }

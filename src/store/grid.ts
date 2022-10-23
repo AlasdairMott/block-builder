@@ -18,7 +18,7 @@ export type GridState = {
 const cells: cellMap = {};
 // c['0,0,0'] = [1,2,3];
 
-const [xSize, ySize, zSize] = [10, 10, 10];
+const [xSize, ySize, zSize] = [5, 5, 5];
 // const cells = new Map<string, CellProps>();
 // for (let x = 0; x < xSize; x++) {
 //     for (let y = 0; y < ySize; y++) {

@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import * as THREE from 'three';
-import { ThreeElements, Vector3 } from '@react-three/fiber'
+import { ThreeElements, Vector3, ThreeEvent, useFrame } from '@react-three/fiber'
 import { Plane, Box } from "@react-three/drei";
 import { Cell, CellProps } from "./Cell";
 import { useSelector, useDispatch } from 'react-redux';
 import { gridActions, GridState } from '../store/grid';
+import Face from "./Face";
+import { AnyARecord } from "dns";
 
 export function Grid() {
     // const [x, setX] = React.useState(10);
@@ -30,6 +32,18 @@ export function Grid() {
     //console.log(cells)
     // console.log(grid.cells)
 
+    const [hoveredFace, setHoveredFace] = useState<{id: string, distance: number} | null>(null);
+
+    const facesHoverOverHandler = (e: {id: string; distance: number}) => {
+        setHoveredFace({
+            id: e.id,
+            distance: e.distance
+        });
+    }
+
+    // useFrame((state) => {
+    //     console.log(state.raycaster)
+    //     })
 
     return (
         <group>
@@ -52,10 +66,14 @@ export function Grid() {
             })} */}
             {cells.map((cell: CellProps) => {
                 return (
-                    <Cell
-                        {...cell}
-                        key={cell.blockId}
-                    />
+                    <>
+                        <Cell
+                            {...cell}
+                            onPointerOver={facesHoverOverHandler}
+                            hoveredFace={hoveredFace}
+                            key={cell.blockId}
+                        />
+                    </>
                 );
             })}
 
