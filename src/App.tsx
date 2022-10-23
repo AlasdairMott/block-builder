@@ -6,10 +6,13 @@ import { Vector3, VectorKeyframeTrack } from 'three';
 import { Cell } from './Grid/Cell'
 import { Grid } from './Grid/Grid'
 import { Plane } from '@react-three/drei';
+import * as THREE from 'three';
 
 function App() {
 
   const box = <boxGeometry args={[1, 1, 1]}/>;
+
+  
 
   return (
     <div className="App">

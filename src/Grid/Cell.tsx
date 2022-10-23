@@ -1,10 +1,11 @@
 import * as THREE from 'three'
 import React, { useRef, useState } from 'react'
-import { ThreeElements, ThreeEvent, Vector3 } from '@react-three/fiber'
+import { ThreeElements, ThreeEvent, useFrame, Vector3 } from '@react-three/fiber'
 import { Model } from './Model';
 import { gridActions } from '../store/grid';
 import { useSelector, useDispatch } from 'react-redux';
 import Face from './Face';
+import { Euler } from 'three';
 
 export type CellProps = {
     blockId: string;
@@ -12,8 +13,11 @@ export type CellProps = {
     color?: string;
     locked: boolean;
     active: boolean;
-    onPointerOver?: (e: {id: string; distance: number}) => void;
-    hoveredFace?: ({id: string; distance: number} | null);
+}
+
+type Face = {
+    position: Vector3,
+    rotation: Euler
 }
 
 export function Cell(props: CellProps) {
@@ -26,117 +30,47 @@ export function Cell(props: CellProps) {
     //const [hovered, setHover] = useState(grid.selectedBlock.id === props.blockId);
     const hovered = grid.selectedBlock.id === props.blockId;
 
-    const clickHandler = (e: ThreeEvent<MouseEvent>) => {
-        if (hovered) {
-            setActive(!active);
-
-            dispatch(gridActions.addBlock({
-                id: props.blockId,
-                position: props.position
-            }));
-        }
-    }
-
-    const pointerOverHandler = (e: ThreeEvent<PointerEvent>) => {
-        // dispatch(gridActions.hoverEnter({
-        //     id: props.blockId,
-        //     distance: e.distance
-        // }));
-    }
-
-    const pointerOutHandler = (e: ThreeEvent<PointerEvent>) => {
-        // dispatch(gridActions.hoverExit({
-        //     id: props.blockId,
-        //     distance: e.distance
-        // }));
-    }
-
-    const facePointerOverHandler = (e: {id: string; distance: number}) => {
-        props.onPointerOver?.(e);
-    }
-
-    let color;
-    if (props.locked) {
-        color = '#D3D3D3'
-    } else if (hovered) {
-        color = 'yellow'
-    } else if (active) {
-        color = 'cyan'
-    } else {
-        color = props.color;
-    };
-
     // const opacity = hovered ? 1.0 : 0.0;
     const opacity = 0.6;
     const position = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     const faceOffset = 0.2;
 
-    // const faces = [
-    //     { id: Math.random().toString(), position: new THREE.Vector3(0, 0, faceOffset), rotation: new THREE.Euler(0, 0, 0)},
-    //     { id: Math.random().toString(), position: new THREE.Vector3(0, 0, -faceOffset), rotation: new THREE.Euler(0, Math.PI, 0)},
-    //     { id: Math.random().toString(), position: new THREE.Vector3(0, faceOffset, 0), rotation: new THREE.Euler(-Math.PI / 2, 0, 0)},
-    //     { id: Math.random().toString(), position: new THREE.Vector3(0, -faceOffset, 0), rotation: new THREE.Euler(Math.PI / 2, 0, 0)},
-    //     { id: Math.random().toString(), position: new THREE.Vector3(faceOffset, 0, 0), rotation: new THREE.Euler(0, Math.PI / 2, 0)},
-    //     { id: Math.random().toString(), position: new THREE.Vector3(-faceOffset, 0, 0), rotation: new THREE.Euler(0, -Math.PI / 2, 0)},
-    // ]
+    const faces: Face[] = [
+        { position: new THREE.Vector3(0, 0, faceOffset), rotation: new THREE.Euler(0, 0, 0) },
+        { position: new THREE.Vector3(0, 0, -faceOffset), rotation: new THREE.Euler(0, Math.PI, 0) },
+        { position: new THREE.Vector3(0, faceOffset, 0), rotation: new THREE.Euler(-Math.PI / 2, 0, 0) },
+        { position: new THREE.Vector3(0, -faceOffset, 0), rotation: new THREE.Euler(Math.PI / 2, 0, 0) },
+        { position: new THREE.Vector3(faceOffset, 0, 0), rotation: new THREE.Euler(0, Math.PI / 2, 0) },
+        { position: new THREE.Vector3(-faceOffset, 0, 0), rotation: new THREE.Euler(0, -Math.PI / 2, 0) },
+    ]
 
     return (
-        <>
-            <mesh
-                {...props}
-                visible={hovered || active}
-                position={props.position}
-                onClick={clickHandler}
-                onPointerOver={pointerOverHandler}
-                onPointerOut={pointerOutHandler}>
-                {!props.locked && !active && <boxGeometry />}
-                {active && <Model />}
-                <meshStandardMaterial attach="material" color={color} transparent={true} opacity={opacity} />
+        <group position={props.position}>
+            <mesh visible={false}>
+                <boxGeometry />
+                <meshStandardMaterial attach="material" color={"yellow"} transparent={true} opacity={opacity} />
             </mesh>
-            <Face
-                position={new THREE.Vector3(0, -faceOffset, 0).add(position)}
-                rotation={[Math.PI / 2, 0, 0]}
-                scale={faceOffset*2}
-                onPointerEnterFace={facePointerOverHandler}
-                hoveredFace={props.hoveredFace}
-            />
-            <Face
-                position={new THREE.Vector3(0, 0, faceOffset).add(position)}
-                rotation={[0, 0, Math.PI / 2]}
-                scale={faceOffset*2}
-                onPointerEnterFace={facePointerOverHandler}
-                hoveredFace={props.hoveredFace}
-            />
-            <Face
-                position={new THREE.Vector3(0, 0, -faceOffset).add(position)}
-                rotation={[Math.PI, 0, 0]}
-                scale={faceOffset*2}
-                onPointerEnterFace={facePointerOverHandler}
-                hoveredFace={props.hoveredFace}
-            />
-            <Face
-                position={new THREE.Vector3(0, faceOffset, 0).add(position)}
-                rotation={[-Math.PI / 2, 0, 0]}
-                scale={faceOffset*2}
-                onPointerEnterFace={facePointerOverHandler}
-                hoveredFace={props.hoveredFace}
-            />
-            <Face
-                position={new THREE.Vector3(faceOffset, 0, 0).add(position)}
-                rotation={[0, Math.PI / 2, 0]}
-                scale={faceOffset*2}
-                onPointerEnterFace={facePointerOverHandler}
-                hoveredFace={props.hoveredFace}
-            />
-            <Face
-                position={new THREE.Vector3(-faceOffset, 0, 0).add(position)}
-                rotation={[0, -Math.PI / 2, 0]}
-                scale={faceOffset*2}
-                onPointerEnterFace={facePointerOverHandler}
-                hoveredFace={props.hoveredFace}
-            />
-
-        </>
+            <Faces faces={faces} />
+        </group>
 
     );
 };
+
+const Faces = (props: any) => {
+
+    const refs = useRef<THREE.Mesh[]>([]);
+
+    useFrame((state) => {
+        const intersections = state.raycaster.intersectObjects(refs, true);
+    });
+
+    return (<>{
+        props.faces.map((face: Face, index: number) => {return (
+            <Face
+                ref={(element: THREE.Mesh) => refs.current.push(element)}
+                key={index}
+                position={face.position}
+                rotation={face.rotation}
+            />)
+    })}</>)
+}
