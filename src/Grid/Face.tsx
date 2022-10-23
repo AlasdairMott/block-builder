@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import React, { useRef, useState } from 'react'
-import { ThreeElements, ThreeEvent, Vector3 } from '@react-three/fiber'
+import { ThreeElements, ThreeEvent, useFrame, Vector3 } from '@react-three/fiber'
 import { Model } from './Model';
 import { gridActions } from '../store/grid';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,9 +11,27 @@ function randomColor() {
 }
 
 export default function Face(props: any) {
+
+    const [color, setColor] = useState(randomColor());
+
+    // useFrame((state) => {
+
+    //     //const intersections = state.raycaster.intersectObjects(state.scene.children, true);
+    // });
+
+    const raycastHandler = (e: any) => {
+    }
+
+    const enterHandler = (e: ThreeEvent<PointerEvent>) => {
+        // if (e.eventObject === e.object){
+
+        // }
+        setColor(randomColor());
+    };
+
     return (
-        <Plane {...props} scale={0.5}>
-            <meshBasicMaterial attach="material" color={randomColor()} />
+        <Plane {...props} scale={0.5} onPointerEnter={enterHandler}>
+            <meshBasicMaterial attach="material" color={color} />
         </Plane>
     )
 };

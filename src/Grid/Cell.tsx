@@ -58,16 +58,9 @@ export function Cell(props: CellProps) {
 
 const Faces = (props: any) => {
 
-    const refs = useRef<THREE.Mesh[]>([]);
-
-    useFrame((state) => {
-        const intersections = state.raycaster.intersectObjects(refs, true);
-    });
-
     return (<>{
         props.faces.map((face: Face, index: number) => {return (
             <Face
-                ref={(element: THREE.Mesh) => refs.current.push(element)}
                 key={index}
                 position={face.position}
                 rotation={face.rotation}
