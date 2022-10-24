@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CellProps } from '../Grid/Cell';
+import { CellProps, Direction } from '../Grid/Cell';
 
 type cellMap = { [k: string]: CellProps };
 
@@ -39,12 +39,12 @@ const gridSlice = createSlice({
             const position = action.payload.blockId.split('-').map(Number) as [x: number, y: number, z: number];
 
             switch (action.payload.faceId){
-                case ("x+"): position[0] += 1; break;
-                case ("x-"): position[0] -= 1; break;
-                case ("y+"): position[1] += 1; break;
-                case ("y-"): position[1] -= 1; break;
-                case ("z+"): position[2] += 1; break;
-                case ("z-"): position[2] -= 1; break;
+                case (Direction.xPos): position[0] += 1; break;
+                case (Direction.xNeg): position[0] -= 1; break;
+                case (Direction.yPos): position[1] += 1; break;
+                case (Direction.yNeg): position[1] -= 1; break;
+                case (Direction.zPos): position[2] += 1; break;
+                case (Direction.zNeg): position[2] -= 1; break;
             }
 
             const neighbourId = position.join('-');

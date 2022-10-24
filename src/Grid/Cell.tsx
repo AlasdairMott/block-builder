@@ -12,9 +12,18 @@ export type CellProps = {
 }
 
 type FaceProps = {
-    faceId: string;
+    faceId: Direction;
     position: Vector3,
     rotation: Euler
+}
+
+export enum Direction {
+    zPos = 'zPos',
+    zNeg = 'zNeg',
+    xPos = 'xPos',
+    xNeg = 'xNeg',
+    yPos = 'yPos',
+    yNeg = 'yNeg'
 }
 
 export function Cell(props: CellProps) {
@@ -22,12 +31,12 @@ export function Cell(props: CellProps) {
     const F = 0.51; // face size
 
     const faces: FaceProps[] = [
-        { faceId:"z+", position: new THREE.Vector3(0, 0, F), rotation: new THREE.Euler(0, 0, 0) }, //front
-        { faceId:"z-", position: new THREE.Vector3(0, 0, -F), rotation: new THREE.Euler(0, Math.PI, 0) }, //back
-        { faceId:"y+", position: new THREE.Vector3(0, F, 0), rotation: new THREE.Euler(-Math.PI / 2, 0, 0) }, //up
-        { faceId:"y-", position: new THREE.Vector3(0, -F, 0), rotation: new THREE.Euler(Math.PI / 2, 0, 0) }, //down
-        { faceId:"x+", position: new THREE.Vector3(F, 0, 0), rotation: new THREE.Euler(0, Math.PI / 2, 0) }, //right
-        { faceId:"x-", position: new THREE.Vector3(-F, 0, 0), rotation: new THREE.Euler(0, -Math.PI / 2, 0) }, //left
+        { faceId:Direction.zPos, position: new THREE.Vector3(0, 0, F), rotation: new THREE.Euler(0, 0, 0) }, //front
+        { faceId:Direction.zNeg, position: new THREE.Vector3(0, 0, -F), rotation: new THREE.Euler(0, Math.PI, 0) }, //back
+        { faceId:Direction.yPos, position: new THREE.Vector3(0, F, 0), rotation: new THREE.Euler(-Math.PI / 2, 0, 0) }, //up
+        { faceId:Direction.yNeg, position: new THREE.Vector3(0, -F, 0), rotation: new THREE.Euler(Math.PI / 2, 0, 0) }, //down
+        { faceId:Direction.xPos, position: new THREE.Vector3(F, 0, 0), rotation: new THREE.Euler(0, Math.PI / 2, 0) }, //right
+        { faceId:Direction.xNeg, position: new THREE.Vector3(-F, 0, 0), rotation: new THREE.Euler(0, -Math.PI / 2, 0) }, //left
     ]
 
     return (
