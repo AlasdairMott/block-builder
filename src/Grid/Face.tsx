@@ -1,37 +1,37 @@
-import * as THREE from 'three'
-import React, { useRef, useState } from 'react'
-import { ThreeElements, ThreeEvent, useFrame, Vector3 } from '@react-three/fiber'
-import { Model } from './Model';
-import { gridActions } from '../store/grid';
-import { useSelector, useDispatch } from 'react-redux';
 import { Plane } from "@react-three/drei";
+import { ThreeEvent } from '@react-three/fiber';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { gridActions } from '../store/grid';
 
-function randomColor() {
-  return new THREE.Color(Math.random(), Math.random(), Math.random())
-}
 
 export default function Face(props: any) {
+    const dispatch = useDispatch();
 
-    const [color, setColor] = useState(randomColor());
-
-    // useFrame((state) => {
-
-    //     //const intersections = state.raycaster.intersectObjects(state.scene.children, true);
-    // });
-
-    const raycastHandler = (e: any) => {
-    }
+    const [hovered, setHover] = useState(false);
 
     const enterHandler = (e: ThreeEvent<PointerEvent>) => {
-        // if (e.eventObject === e.object){
+        setHover(true);
+        e.stopPropagation();
+    };
 
-        // }
-        setColor(randomColor());
+    const leaveHandler = (e: ThreeEvent<PointerEvent>) => {
+        setHover(false);
+        e.stopPropagation();
+    };
+
+    const clickHandler = (e: ThreeEvent<PointerEvent>) => {
+        dispatch(gridActions.addBlock({
+            faceId: props.faceId,
+            blockId: props.blockId
+        }));
+
+        e.stopPropagation();
     };
 
     return (
-        <Plane {...props} scale={0.5} onPointerEnter={enterHandler}>
-            <meshBasicMaterial attach="material" color={color} />
+        <Plane {...props} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={clickHandler} visible={hovered}>
+            <meshStandardMaterial attach="material" color={'yellow'} transparent={true} opacity={0.5} />
         </Plane>
     )
 };

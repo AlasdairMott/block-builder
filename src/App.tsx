@@ -1,12 +1,7 @@
-import React, { useEffect } from 'react';
+import { OrbitControls, Plane } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import './App.css';
-import { Canvas, useFrame, ThreeElements } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
-import { Vector3, VectorKeyframeTrack } from 'three';
-import { Cell } from './Grid/Cell'
-import { Grid } from './Grid/Grid'
-import { Plane } from '@react-three/drei';
-import * as THREE from 'three';
+import { Grid } from './Grid/Grid';
 
 function App() {
 
