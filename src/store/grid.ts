@@ -9,7 +9,7 @@ export type GridState = {
 
 const cells: cellMap = {};
 
-const [xSize, ySize, zSize] = [5, 5, 5];
+const [xSize, ySize, zSize] = [9, 9, 9];
 
 for (let x = 0; x < xSize; x++) {
     for (let y = 0; y < ySize; y++) {
@@ -20,7 +20,7 @@ for (let x = 0; x < xSize; x++) {
                 blockId: id,
                 position: position,
                 locked: (y != 0),
-                active: (x == Math.floor(xSize/2) && y == 0 && z == Math.floor(zSize/2)),
+                active: (x === Math.floor(xSize/2) && y === 0 && z === Math.floor(zSize/2)),
             };
         }
     }
