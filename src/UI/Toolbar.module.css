@@ -1,0 +1,14 @@
+.toolbar {
+    top: 10px;
+    left: 10px;
+    padding: 8px;
+    position: absolute;
+    background-color:#ffffffdf;
+    backdrop-filter: blur(6px);
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    border-color: #e1e1e1;
+    border-style: solid;
+    border-width: 0.5px;
+    margin: auto;
+}

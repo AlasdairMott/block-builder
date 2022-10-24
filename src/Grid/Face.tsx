@@ -1,11 +1,11 @@
 import { Plane } from "@react-three/drei";
 import { ThreeEvent } from '@react-three/fiber';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { gridActions } from '../store/grid';
+import { useAppDispatch } from "../store/hooks";
 
 export default function Face(props: any) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const [hovered, setHover] = useState(false);
 

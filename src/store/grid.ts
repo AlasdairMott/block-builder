@@ -19,7 +19,7 @@ for (let x = 0; x < xSize; x++) {
             cells[id] = {
                 blockId: id,
                 position: position,
-                locked: (y != 0),
+                locked: (y !== 0),
                 active: (x === Math.floor(xSize/2) && y === 0 && z === Math.floor(zSize/2)),
             };
         }
@@ -53,6 +53,8 @@ const gridSlice = createSlice({
                 state.cells[neighbourId].locked = false;
                 state.cells[neighbourId].active = true;
             }
+        },
+        subtractBlock: (state, action) => {
         }
     }
 });

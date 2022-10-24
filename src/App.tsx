@@ -2,6 +2,7 @@ import { OrbitControls, Plane } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import './App.css';
 import { Grid } from './Grid/Grid';
+import Toolbar from './UI/Toolbar';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <shadowMaterial opacity={0.1}/>
         </Plane>
       </Canvas>
+      <Toolbar></Toolbar>
     </div>
   );
 }

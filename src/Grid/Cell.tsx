@@ -1,6 +1,8 @@
 import { Vector3 } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Euler } from 'three';
+import { useAppSelector } from '../store/hooks';
+import { ActiveTool } from '../store/ui';
 import Face from './Face';
 import { Model } from './Model';
 
@@ -27,6 +29,7 @@ export enum Direction {
 }
 
 export function Cell(props: CellProps) {
+    const mode = useAppSelector(state => state.ui.mode);
 
     const F = 0.51; // face size
 
@@ -44,7 +47,7 @@ export function Cell(props: CellProps) {
             <mesh visible={props.active}>
                 {props.active && <Model />}
             </mesh>
-            {!props.locked && props.active &&
+            {!props.locked && props.active && mode === ActiveTool.Add &&
                 faces.map((face: FaceProps, index: number) => {
                     return (<Face
                         key={index}
