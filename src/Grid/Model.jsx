@@ -19,6 +19,8 @@ const COLOR = [
   "white"
 ]
 
+
+
 export function Model(props) {
   const { nodes, materials } = useGLTF("./models/model_0.gltf");
 
@@ -37,10 +39,10 @@ export function Model(props) {
           position={[0.5, -1.25, 0.5]}
           rotation={rotation}
         >
-          <meshStandardMaterial color={color} />
+          <meshLambertMaterial color={color} />
         </mesh>
         <lineSegments name="wire" position={[0.5, -1.25, 0.5]} rotation={rotation}>
-          <edgesGeometry attach="geometry" args={[nodes[modelName].geometry]} />
+          <edgesGeometry attach="geometry" args={[nodes[modelName].geometry, 30]} />
           <lineBasicMaterial attach="material" color="black" />
         </lineSegments>
       </group>

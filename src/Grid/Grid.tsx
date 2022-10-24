@@ -1,9 +1,8 @@
+import { useSelector } from 'react-redux';
 import { Cell, CellProps } from "./Cell";
-import { useSelector, useDispatch } from 'react-redux';
 
 export function Grid() {
 
-    const dispatch = useDispatch();
     const grid = useSelector((state: any) => state.grid);
 
     return (

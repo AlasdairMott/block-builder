@@ -1,5 +1,4 @@
 import { Vector3 } from '@react-three/fiber';
-import { useDispatch, useSelector } from 'react-redux';
 import * as THREE from 'three';
 import { Euler } from 'three';
 import Face from './Face';
@@ -19,9 +18,6 @@ type FaceProps = {
 }
 
 export function Cell(props: CellProps) {
-
-    const dispatch = useDispatch();
-    const grid = useSelector((state: any) => state.grid);
 
     const F = 0.51; // face size
 

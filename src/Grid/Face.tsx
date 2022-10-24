@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { gridActions } from '../store/grid';
 
-
 export default function Face(props: any) {
     const dispatch = useDispatch();
 
