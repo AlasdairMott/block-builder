@@ -1,14 +1,19 @@
 .toolbarButton {
     border-radius: 6px;
-    border-style: none;
+    border-style: inset;
     background-color: transparent;
-    border-color: #eeeeeecb;
     cursor: pointer;
     padding: 12px;
+    border-width: 0.1px;
+    border-color: transparent;
 }
 
 .toolbarButton__active {
     background-color: rgb(0, 0, 0);
+}
+
+.toolbarButton:hover {
+    border-color: black;
 }
 
 

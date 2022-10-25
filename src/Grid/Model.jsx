@@ -14,10 +14,10 @@ const MODELS = [
 ]
 
 const COLOR = [
-  new Color(0xff0000).convertSRGBToLinear(),
-  new Color("rgb(255,200,0)").convertSRGBToLinear(),
-  new Color(0x0000ff).convertSRGBToLinear(),
-  new Color(0xffffff).convertSRGBToLinear()
+  "rgb(255,0,0)",
+  "rgb(255,190,20)",
+  "rgb(0,0,255)",
+  "rgb(255,255,255)"
 ]
 
 export function Model(props) {
