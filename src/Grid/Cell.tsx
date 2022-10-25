@@ -12,7 +12,6 @@ import { Model } from './Model';
 export type CellProps = {
     blockId: string;
     position: [x: number, y: number, z: number],
-    locked: boolean;
     active: boolean;
 }
 
@@ -60,6 +59,7 @@ export function Cell(props: CellProps) {
     };
 
     const clickHandler = (e: ThreeEvent<MouseEvent>) => {
+        setHover(false);
         dispatch(gridActions.subtractBlock({
             blockId: props.blockId
         }));
@@ -72,7 +72,7 @@ export function Cell(props: CellProps) {
             <mesh visible={props.active}>
                 {props.active && <Model />}
             </mesh>
-            {!props.locked && props.active && mode === ActiveTool.Add &&
+            {props.active && mode === ActiveTool.Add &&
                 faces.map((face: FaceProps, index: number) => {
                     return (<Face
                         key={index}
