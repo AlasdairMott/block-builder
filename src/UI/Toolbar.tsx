@@ -8,14 +8,14 @@ export enum Command {
     Redo
 }
 
-const Toolbar: React.FC = () => {
+const Toolbar: React.FC<{onZoomExtents: () => void}> = (props) => {
     return (
         <>
             <div className={styles.toolbar}>
                 <ToolbarToolButton mode={ActiveTool.Add} />
                 <ToolbarToolButton mode={ActiveTool.Subtract} />
                 <ToolbarToolButton mode={ActiveTool.Select} />
-                <ToolbarCommandButton command={Command.ZoomExtents} />
+                <ToolbarCommandButton command={Command.ZoomExtents} onClick={props.onZoomExtents}/>
             </div>
         </>
     );

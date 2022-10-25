@@ -36,20 +36,10 @@ const ToolbarToolButton = (props: { mode: ActiveTool; }) => {
     );
 }
 
-export const ToolbarCommandButton = (props: { command: Command; }) => {
-
-    const handleClick = () => {
-        // console.log("Command", Command[props.command]);
-        switch(props.command) {
-            case Command.ZoomExtents: 
-                
-                break;
-        }
-    }
-
+export const ToolbarCommandButton = (props: { command: Command; onClick: React.MouseEventHandler}) => {
     const style = `${styles.toolbarButton}`
     return (
-        <button className={style} onClick={handleClick} title={Command[props.command]}>
+        <button className={style} onClick={props.onClick} title={Command[props.command]}>
             {props.command === Command.ZoomExtents && <Home {...ICONPROPS}/>}
         </button>
     );

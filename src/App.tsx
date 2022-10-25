@@ -12,14 +12,18 @@ function App() {
 
     const dispatch = useAppDispatch();
     const orbitControls = useRef<Orbit>(null);
-
+    
     const handleKeyPress = useCallback((event: any) => {
         switch (event.key) {
             case 'a': dispatch(changeMode({mode: ActiveTool.Add})); break;
             case 's': dispatch(changeMode({mode: ActiveTool.Subtract})); break;
             case 'v': dispatch(changeMode({mode: ActiveTool.Select})); break;
-            case 'f': orbitControls.current?.target.set(0, 0, 0); break;
+            case 'f': zoomExtents(); break;
         }
+    }, []);
+
+    const zoomExtents = useCallback(() => {
+        orbitControls.current?.target.set(0, 0, 0);
     }, []);
 
     useEffect(() => {
@@ -49,7 +53,7 @@ function App() {
                     <shadowMaterial opacity={0.1} />
                 </Plane>
             </Canvas>
-            <Toolbar></Toolbar>
+            <Toolbar onZoomExtents={zoomExtents}></Toolbar>
         </div>
     );
 }
