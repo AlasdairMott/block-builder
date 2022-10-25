@@ -55,6 +55,11 @@ const gridSlice = createSlice({
             }
         },
         subtractBlock: (state, action) => {
+            const blockId = action.payload.blockId;
+            if (state.cells[blockId] && state.cells[blockId].active) {
+                state.cells[blockId].locked = true;
+                state.cells[blockId].active = false;
+            }
         }
     }
 });

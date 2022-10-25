@@ -1,7 +1,10 @@
-import { Vector3 } from '@react-three/fiber';
+import { Box } from '@react-three/drei';
+import { ThreeEvent, Vector3 } from '@react-three/fiber';
+import { useState } from 'react';
 import * as THREE from 'three';
 import { Euler } from 'three';
-import { useAppSelector } from '../store/hooks';
+import { gridActions } from '../store/grid';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { ActiveTool } from '../store/ui';
 import Face from './Face';
 import { Model } from './Model';
@@ -29,18 +32,40 @@ export enum Direction {
 }
 
 export function Cell(props: CellProps) {
+    const dispatch = useAppDispatch();
+
     const mode = useAppSelector(state => state.ui.mode);
+    
+    const [hovered, setHover] = useState(false);
 
     const F = 0.51; // face size
 
     const faces: FaceProps[] = [
-        { faceId:Direction.zPos, position: new THREE.Vector3(0, 0, F), rotation: new THREE.Euler(0, 0, 0) }, //front
-        { faceId:Direction.zNeg, position: new THREE.Vector3(0, 0, -F), rotation: new THREE.Euler(0, Math.PI, 0) }, //back
-        { faceId:Direction.yPos, position: new THREE.Vector3(0, F, 0), rotation: new THREE.Euler(-Math.PI / 2, 0, 0) }, //up
-        { faceId:Direction.yNeg, position: new THREE.Vector3(0, -F, 0), rotation: new THREE.Euler(Math.PI / 2, 0, 0) }, //down
-        { faceId:Direction.xPos, position: new THREE.Vector3(F, 0, 0), rotation: new THREE.Euler(0, Math.PI / 2, 0) }, //right
-        { faceId:Direction.xNeg, position: new THREE.Vector3(-F, 0, 0), rotation: new THREE.Euler(0, -Math.PI / 2, 0) }, //left
+        { faceId: Direction.xPos, position: new THREE.Vector3(F, 0, 0), rotation: new THREE.Euler(0, Math.PI / 2, 0) }, //right
+        { faceId: Direction.xNeg, position: new THREE.Vector3(-F, 0, 0), rotation: new THREE.Euler(0, -Math.PI / 2, 0) }, //left
+        { faceId: Direction.yPos, position: new THREE.Vector3(0, F, 0), rotation: new THREE.Euler(-Math.PI / 2, 0, 0) }, //up
+        { faceId: Direction.yNeg, position: new THREE.Vector3(0, -F, 0), rotation: new THREE.Euler(Math.PI / 2, 0, 0) }, //down
+        { faceId: Direction.zPos, position: new THREE.Vector3(0, 0, F), rotation: new THREE.Euler(0, 0, 0) }, //front
+        { faceId: Direction.zNeg, position: new THREE.Vector3(0, 0, -F), rotation: new THREE.Euler(0, Math.PI, 0) }, //back
     ]
+
+    const enterHandler = (e: ThreeEvent<PointerEvent>) => {
+        setHover(true);
+        e.stopPropagation();
+    };
+
+    const leaveHandler = (e: ThreeEvent<PointerEvent>) => {
+        setHover(false);
+        e.stopPropagation();
+    };
+
+    const clickHandler = (e: ThreeEvent<MouseEvent>) => {
+        dispatch(gridActions.subtractBlock({
+            blockId: props.blockId
+        }));
+
+        e.stopPropagation();
+    };
 
     return (
         <group position={props.position}>
@@ -55,9 +80,15 @@ export function Cell(props: CellProps) {
                         blockId={props.blockId}
                         scale={F * 2}
                         position={face.position}
-                        rotation={face.rotation}/>
+                        rotation={face.rotation} />
                     )
-                })}
+                })
+            }
+            {props.active && mode === ActiveTool.Subtract &&
+                <Box scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={clickHandler}>
+                    <meshLambertMaterial color="red" transparent={true} opacity={0.2} />
+                </Box>
+            }
         </group>
 
     );
