@@ -130,6 +130,10 @@ const gridSlice = createSlice({
             if (state.cells[blockId] && state.cells[blockId].active) {
                 state.cells[blockId].active = false;
             }
+        },
+        selectBlock: (state, action) => {
+            const blockId = action.payload.blockId;
+            state.nextModel = state.cells[blockId].model ?? GetRandomModel();
         }
     }
 });

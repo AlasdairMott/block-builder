@@ -53,7 +53,7 @@ export function Cell(props: CellProps) {
         e.stopPropagation();
     };
 
-    const clickHandler = (e: ThreeEvent<MouseEvent>) => {
+    const subtractHandler = (e: ThreeEvent<MouseEvent>) => {
         setHover(false);
         dispatch(gridActions.subtractBlock({
             blockId: props.blockId
@@ -61,6 +61,16 @@ export function Cell(props: CellProps) {
 
         e.stopPropagation();
     };
+
+    const selectHandler = (e: ThreeEvent<MouseEvent>) => {
+        dispatch(gridActions.selectBlock({
+            blockId: props.blockId
+        }));
+
+        e.stopPropagation();
+    };
+
+    const opacity = 0.5;
 
     return (
         <group position={props.position}>
@@ -80,8 +90,13 @@ export function Cell(props: CellProps) {
                 })
             }
             {props.active && mode === ActiveTool.Subtract &&
-                <Box scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={clickHandler}>
-                    <meshLambertMaterial color="red" transparent={true} opacity={0.2} />
+                <Box scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={subtractHandler}>
+                    <meshLambertMaterial color="red" transparent={true} opacity={opacity} />
+                </Box>
+            }
+            {props.active && mode === ActiveTool.Select &&
+                <Box scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={selectHandler}>
+                    <meshLambertMaterial color="yellow" transparent={true} opacity={opacity} />
                 </Box>
             }
         </group>
