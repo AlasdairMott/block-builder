@@ -3,16 +3,18 @@ import { Canvas } from '@react-three/fiber';
 import { useCallback, useEffect, useRef } from 'react';
 import './App.css';
 import { Grid } from './Grid/Grid';
-import { useAppDispatch } from './store/hooks';
+import { useAppDispatch, useAppSelector } from './store/hooks';
 import { ActiveTool, changeMode } from './store/ui';
 import Toolbar from './UI/Toolbar';
 import { OrbitControls as Orbit } from 'three-stdlib'
+import { getGridCentroid } from './store/grid';
 
 function App() {
 
     const dispatch = useAppDispatch();
     const orbitControls = useRef<Orbit>(null);
-    
+    const grid = useAppSelector(state => state.grid);
+
     const handleKeyPress = useCallback((event: any) => {
         switch (event.key) {
             case 'a': dispatch(changeMode({mode: ActiveTool.Add})); break;
@@ -23,7 +25,9 @@ function App() {
     }, []);
 
     const zoomExtents = useCallback(() => {
-        orbitControls.current?.target.set(0, 0, 0);
+        const centroid = getGridCentroid(grid.cells);
+        console.log(centroid)
+        orbitControls.current?.target.set(centroid.x, centroid.y, centroid.z);
     }, []);
 
     useEffect(() => {

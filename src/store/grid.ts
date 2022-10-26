@@ -1,10 +1,45 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Vector3 } from 'three';
 import { CellProps, Direction } from '../Grid/Cell';
 
 type cellMap = { [k: string]: CellProps };
 
 export type GridState = {
     cells: cellMap;
+}
+
+export function getGridCentroid(cells: cellMap): Vector3 {
+    let min: Vector3 = new Vector3(Infinity, Infinity, Infinity);
+    let max: Vector3 = new Vector3(-Infinity, -Infinity, -Infinity);
+
+    //find the min x, y, z and max x, y, z
+    for (const cell of Object.values(cells)) {
+        if (cell.active) {
+            const { position } = cell;
+    
+            // could be simplified in an extension method for Vector3
+            min.x = Math.min(min.x, position[0]);
+            min.y = Math.min(min.y, position[1]);
+            min.z = Math.min(min.z, position[2]);
+    
+            max.x = Math.max(max.x, position[0]);
+            max.y = Math.max(max.y, position[1]);
+            max.z = Math.max(max.z, position[2]);
+
+            console.log('min', min);
+            console.log('max', max);
+        }
+    }
+
+    const numberOfActiveCells = Object.values(cells).filter(cell => cell.active).length;
+    console.log('number of active cells', numberOfActiveCells);
+
+    //find the center of the grid
+    return new Vector3(
+        (min.x + max.x) / 2,
+        (min.y + max.y) / 2,
+        (min.z + max.z) / 2
+    );
 }
 
 const cells: cellMap = {};
