@@ -1,5 +1,6 @@
+import { CellProps } from '../store/grid';
 import { useAppSelector } from '../store/hooks';
-import { Cell, CellProps } from "./Cell";
+import { Cell } from "./Cell";
 
 export function Grid() {
     const grid = useAppSelector(state => state.grid);

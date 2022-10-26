@@ -1,0 +1,9 @@
+.preview {
+    bottom: 20px;
+    left: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    padding: 8px;
+    position: absolute;
+}

@@ -3,17 +3,11 @@ import { ThreeEvent, Vector3 } from '@react-three/fiber';
 import { useState } from 'react';
 import * as THREE from 'three';
 import { Euler } from 'three';
-import { gridActions } from '../store/grid';
+import { CellProps, gridActions } from '../store/grid';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { ActiveTool } from '../store/ui';
 import Face from './Face';
-import { Model } from './Model';
-
-export type CellProps = {
-    blockId: string;
-    position: [x: number, y: number, z: number],
-    active: boolean;
-}
+import Model from './Model';
 
 type FaceProps = {
     faceId: Direction;
@@ -34,6 +28,7 @@ export function Cell(props: CellProps) {
     const dispatch = useAppDispatch();
 
     const mode = useAppSelector(state => state.ui.mode);
+    const model = useAppSelector(state => state.grid.cells[props.blockId].model!);
     
     const [hovered, setHover] = useState(false);
 
@@ -70,7 +65,7 @@ export function Cell(props: CellProps) {
     return (
         <group position={props.position}>
             <mesh visible={props.active}>
-                {props.active && <Model />}
+                {props.active && <Model {...model}/>}
             </mesh>
             {props.active && mode === ActiveTool.Add &&
                 faces.map((face: FaceProps, index: number) => {
@@ -80,7 +75,7 @@ export function Cell(props: CellProps) {
                         blockId={props.blockId}
                         scale={F * 2}
                         position={face.position}
-                        rotation={face.rotation} />
+                        rotation={face.rotation}/>
                     )
                 })
             }

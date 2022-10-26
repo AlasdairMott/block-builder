@@ -1,5 +1,6 @@
 import { ActiveTool } from "../store/ui";
 import styles from "./Toolbar.module.css";
+import "../App.css";
 import ToolbarToolButton, { ToolbarCommandButton } from "./ToolbarButton";
 
 export enum Command {
@@ -11,7 +12,7 @@ export enum Command {
 const Toolbar: React.FC<{onZoomExtents: () => void}> = (props) => {
     return (
         <>
-            <div className={styles.toolbar}>
+            <div className={`${styles.toolbar} glass`}>
                 <ToolbarToolButton mode={ActiveTool.Add} />
                 <ToolbarToolButton mode={ActiveTool.Subtract} />
                 <ToolbarToolButton mode={ActiveTool.Select} />
