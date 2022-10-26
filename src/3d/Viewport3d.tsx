@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { useCallback, useEffect, useRef } from "react";
 import { OrbitControls as Orbit } from 'three-stdlib';
 import { Grid } from '../Grid/Grid';
-import { getGridCentroid } from "../store/grid";
+import { getGridCentroid, gridActions } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { ActiveTool, changeMode } from '../store/ui';
 import Toolbar from '../UI/Toolbar';
@@ -37,6 +37,10 @@ const Viewport3d = () => {
         };
     }, [handleKeyPress]);
 
+    const handleNewFile = () => {
+        dispatch(gridActions.newFile());
+    };
+
     return (
         <>
             <Canvas camera={{ position: [10, 10, 10] }} shadows={true} onKeyDown={handleKeyPress}>
@@ -54,7 +58,7 @@ const Viewport3d = () => {
                     <shadowMaterial opacity={0.1} />
                 </Plane>
             </Canvas>
-            <Toolbar onZoomExtents={zoomExtents}></Toolbar>
+            <Toolbar onZoomExtents={zoomExtents} onNewFile={handleNewFile}></Toolbar>
         </>
     );
 };

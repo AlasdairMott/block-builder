@@ -1,4 +1,4 @@
-import { CursorPointer, Home, Minus, Plus } from "iconoir-react";
+import { CursorPointer, EmptyPage, Home, Minus, Plus } from "iconoir-react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { ActiveTool, changeMode } from "../store/ui";
 import { Command } from "./Toolbar";
@@ -41,6 +41,7 @@ export const ToolbarCommandButton = (props: { command: Command; onClick: React.M
     return (
         <button className={style} onClick={props.onClick} title={Command[props.command]}>
             {props.command === Command.ZoomExtents && <Home {...ICONPROPS}/>}
+            {props.command === Command.New && <EmptyPage {...ICONPROPS}/>}
         </button>
     );
 }

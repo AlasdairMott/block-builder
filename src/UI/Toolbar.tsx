@@ -5,11 +5,12 @@ import ToolbarToolButton, { ToolbarCommandButton } from "./ToolbarButton";
 
 export enum Command {
     ZoomExtents,
+    New,
     Undo,
     Redo
 }
 
-const Toolbar: React.FC<{onZoomExtents: () => void}> = (props) => {
+const Toolbar: React.FC<{onZoomExtents: () => void, onNewFile: () => void}> = (props) => {
     return (
         <>
             <div className={`${styles.toolbar} glass`}>
@@ -17,6 +18,7 @@ const Toolbar: React.FC<{onZoomExtents: () => void}> = (props) => {
                 <ToolbarToolButton mode={ActiveTool.Subtract} />
                 <ToolbarToolButton mode={ActiveTool.Select} />
                 <ToolbarCommandButton command={Command.ZoomExtents} onClick={props.onZoomExtents}/>
+                <ToolbarCommandButton command={Command.New} onClick={props.onNewFile}/>
             </div>
         </>
     );

@@ -65,7 +65,7 @@ export function getGridCentroid(cells: cellMap): Vector3 {
     );
 }
 
-function createCellMap(): cellMap {
+export function createCellMap(): cellMap {
     const cells: cellMap = {};
     const [xSize, ySize, zSize] = [9, 9, 9];
     
@@ -103,6 +103,9 @@ const gridSlice = createSlice({
         nextModel: GetRandomModel()
     },
     reducers: {
+        newFile: (state) => {
+            state.cells = createCellMap();
+        },
         addBlock: (state, action) => {
 
             const position = action.payload.blockId.split('-').map(Number) as [x: number, y: number, z: number];
