@@ -17,7 +17,6 @@ function App() {
 
     const zoomExtents = useCallback(() => {
         const centroid = getGridCentroid(grid.cells);
-        console.log(centroid)
         orbitControls.current?.target.set(centroid.x, centroid.y, centroid.z);
     }, [grid]);
 
@@ -28,7 +27,7 @@ function App() {
             case 'v': dispatch(changeMode({mode: ActiveTool.Select})); break;
             case 'f': zoomExtents(); break;
         }
-    }, [zoomExtents]);
+    }, [zoomExtents, dispatch]);
 
     useEffect(() => {
         // attach the event listener
