@@ -25,14 +25,8 @@ export function getGridCentroid(cells: cellMap): Vector3 {
             max.x = Math.max(max.x, position[0]);
             max.y = Math.max(max.y, position[1]);
             max.z = Math.max(max.z, position[2]);
-
-            console.log('min', min);
-            console.log('max', max);
         }
     }
-
-    const numberOfActiveCells = Object.values(cells).filter(cell => cell.active).length;
-    console.log('number of active cells', numberOfActiveCells);
 
     //find the center of the grid
     return new Vector3(

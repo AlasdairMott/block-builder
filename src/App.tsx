@@ -15,6 +15,12 @@ function App() {
     const orbitControls = useRef<Orbit>(null);
     const grid = useAppSelector(state => state.grid);
 
+    const zoomExtents = useCallback(() => {
+        const centroid = getGridCentroid(grid.cells);
+        console.log(centroid)
+        orbitControls.current?.target.set(centroid.x, centroid.y, centroid.z);
+    }, [grid]);
+
     const handleKeyPress = useCallback((event: any) => {
         switch (event.key) {
             case 'a': dispatch(changeMode({mode: ActiveTool.Add})); break;
@@ -22,13 +28,7 @@ function App() {
             case 'v': dispatch(changeMode({mode: ActiveTool.Select})); break;
             case 'f': zoomExtents(); break;
         }
-    }, []);
-
-    const zoomExtents = useCallback(() => {
-        const centroid = getGridCentroid(grid.cells);
-        console.log(centroid)
-        orbitControls.current?.target.set(centroid.x, centroid.y, centroid.z);
-    }, []);
+    }, [zoomExtents]);
 
     useEffect(() => {
         // attach the event listener
