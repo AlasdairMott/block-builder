@@ -21,7 +21,7 @@ export type CellProps = {
     blockId: string;
     position: [x: number, y: number, z: number],
     active: boolean;
-    model?: ModelProps;
+    model: ModelProps | null;
 }
 
 export type ModelProps = {
@@ -74,11 +74,12 @@ function createCellMap(): cellMap {
             for (let z = 0; z < zSize; z++) {
                 const id = `${x}-${y}-${z}`;
                 const position: [x: number, y: number, z: number] = [x, y, z];
+                const active = (x === Math.floor(xSize / 2) && y === 0 && z === Math.floor(zSize / 2));
                 cells[id] = {
                     blockId: id,
                     position: position,
-                    active: (x === Math.floor(xSize / 2) && y === 0 && z === Math.floor(zSize / 2)),
-                    model: GetRandomModel()
+                    active: active,
+                    model: active ? GetRandomModel() : null
                 };
             }
         }
