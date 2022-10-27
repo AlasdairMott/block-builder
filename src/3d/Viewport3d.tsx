@@ -1,6 +1,7 @@
 import { OrbitControls, Plane } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useCallback, useEffect, useRef } from "react";
+import { ActionCreators } from 'redux-undo';
 import { OrbitControls as Orbit } from 'three-stdlib';
 import { Grid } from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
@@ -21,9 +22,19 @@ const Viewport3d = () => {
     const handleKeyPress = useCallback((event: any) => {
         switch (event.key) {
             case 'a': dispatch(changeMode({ mode: ActiveTool.Add })); break;
+            case 'e':
             case 's': dispatch(changeMode({ mode: ActiveTool.Subtract })); break;
             case 'v': dispatch(changeMode({ mode: ActiveTool.Select })); break;
             case 'f': zoomExtents(); break;
+            case 'z': 
+            case 'Z':
+                if (event.metaKey || event.ctrlKey) {
+                    if (event.shiftKey) {
+                        dispatch(ActionCreators.redo());
+                    } else {
+                        dispatch(ActionCreators.undo());
+                    }
+                }
         }
     }, [zoomExtents, dispatch]);
 
@@ -44,8 +55,8 @@ const Viewport3d = () => {
     return (
         <>
             <Canvas camera={{ position: [10, 10, 10] }} shadows={true} onKeyDown={handleKeyPress}>
-                <color attach="background" args={[0.9,0.9,0.9]} />
-                <OrbitControls target={[0, 0, 0]} ref={orbitControls}/>
+                <color attach="background" args={[0.9, 0.9, 0.9]} />
+                <OrbitControls target={[0, 0, 0]} ref={orbitControls} />
                 <ambientLight intensity={0.2} />
                 <directionalLight
                     position={[100, 200, 100]}

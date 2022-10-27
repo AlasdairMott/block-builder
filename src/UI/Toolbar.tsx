@@ -33,21 +33,3 @@ const  Toolbar: React.FC<{ onZoomExtents: () => void, onNewFile: () => void } & 
 };
 
 export default Toolbar;
-
-// const mapStateToProps = (state: any) => {
-//     return {
-//         canUndo: state.todos.past.length > 0,
-//         canRedo: state.todos.future.length > 0
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch: any) => {
-//     return {
-//         onUndo: () => dispatch(UndoActionCreators.undo()),
-//         onRedo: () => dispatch(UndoActionCreators.redo())
-//     }
-// }
-
-// const ToolbarUndo = connect(mapStateToProps, mapDispatchToProps)(Toolbar as any)
-
-// export default ToolbarUndo;
