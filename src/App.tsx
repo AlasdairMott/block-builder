@@ -6,7 +6,7 @@ function App() {
     return (
         <div className="App" >
             <Viewport3d/>
-            <Preview/>
+            {/* <Preview/> */}
         </div>
     );
 }
