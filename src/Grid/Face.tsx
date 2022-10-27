@@ -2,10 +2,13 @@ import { Plane } from "@react-three/drei";
 import { ThreeEvent } from '@react-three/fiber';
 import { useState } from 'react';
 import { gridActions } from '../store/grid';
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { FaceProps } from "./Cell";
+import Model from "./Model";
 
-export default function Face(props: any) {
+export default function Face(props: FaceProps & { blockId: string, scale: number }) {
     const dispatch = useAppDispatch();
+    const model = useAppSelector(state => state.grid.nextModel);
 
     const [hovered, setHover] = useState(false);
 
@@ -19,7 +22,8 @@ export default function Face(props: any) {
         e.stopPropagation();
     };
 
-    const clickHandler = (e: ThreeEvent<PointerEvent>) => {
+    const clickHandler = (e: ThreeEvent<MouseEvent>) => {
+        setHover(false);
         dispatch(gridActions.addBlock({
             faceId: props.faceId,
             blockId: props.blockId
@@ -29,8 +33,13 @@ export default function Face(props: any) {
     };
 
     return (
-        <Plane {...props} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={clickHandler} visible={hovered}>
-            <meshStandardMaterial attach="material" color={'yellow'} transparent={true} opacity={0.5} />
-        </Plane>
+        <>
+            <Plane {...props} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={clickHandler} visible={false}>
+                <meshStandardMaterial attach="material" color={'yellow'} transparent={true} opacity={0.5} />
+            </Plane>
+            <group position={props.position.clone().multiplyScalar(2)} scale={0.8}>
+                {hovered && <Model {...model} />}
+            </group>
+        </>
     )
 };

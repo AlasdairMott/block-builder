@@ -9,9 +9,9 @@ import { ActiveTool } from '../store/ui';
 import Face from './Face';
 import Model from './Model';
 
-type FaceProps = {
+export type FaceProps = {
     faceId: Direction;
-    position: Vector3,
+    position: THREE.Vector3,
     rotation: Euler
 }
 
@@ -32,7 +32,7 @@ export function Cell(props: CellProps) {
     
     const [hovered, setHover] = useState(false);
 
-    const F = 0.51; // face size
+    const F = 0.5; // face size
 
     const faces: FaceProps[] = [
         { faceId: Direction.xPos, position: new THREE.Vector3(F, 0, 0), rotation: new THREE.Euler(0, Math.PI / 2, 0) }, //right
