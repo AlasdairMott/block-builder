@@ -7,7 +7,7 @@ export function Grid() {
 
     return (
         <>
-            {Object.values<CellProps>(grid.cells).map((cell: CellProps) => {
+            {Object.values<CellProps>(grid.present.cells).map((cell: CellProps) => {
                 return (
                     <Cell
                         {...cell}

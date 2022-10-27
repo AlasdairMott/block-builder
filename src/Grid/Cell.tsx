@@ -1,5 +1,5 @@
 import { Box } from '@react-three/drei';
-import { ThreeEvent, Vector3 } from '@react-three/fiber';
+import { ThreeEvent } from '@react-three/fiber';
 import { useState } from 'react';
 import * as THREE from 'three';
 import { Euler } from 'three';
@@ -28,7 +28,7 @@ export function Cell(props: CellProps) {
     const dispatch = useAppDispatch();
 
     const mode = useAppSelector(state => state.ui.mode);
-    const model = useAppSelector(state => state.grid.cells[props.blockId].model!);
+    const model = useAppSelector(state => state.grid.present.cells[props.blockId].model!);
     
     const [hovered, setHover] = useState(false);
 

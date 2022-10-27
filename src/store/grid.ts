@@ -96,12 +96,14 @@ function GetRandomModel(): ModelProps {
     }
 }
 
+const initialState = {
+    cells: createCellMap(),
+    nextModel: GetRandomModel()
+};
+
 const gridSlice = createSlice({
     name: 'grid',
-    initialState: {
-        cells: createCellMap(),
-        nextModel: GetRandomModel()
-    },
+    initialState: initialState, //(initialState as any) as StateWithHistory<typeof initialState>,
     reducers: {
         newFile: (state) => {
             state.cells = createCellMap();

@@ -1,10 +1,11 @@
-import {configureStore} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
+import undoable from 'redux-undo';
 import gridReducer from './grid';
 import uiReducer from './ui';
 
 export const store = configureStore({
     reducer: {
-        grid: gridReducer,
+        grid: undoable(gridReducer),
         ui: uiReducer
     }
 });

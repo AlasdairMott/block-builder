@@ -14,7 +14,7 @@ const Viewport3d = () => {
     const grid = useAppSelector(state => state.grid);
 
     const zoomExtents = useCallback(() => {
-        const centroid = getGridCentroid(grid.cells);
+        const centroid = getGridCentroid(grid.present.cells);
         orbitControls.current?.target.set(centroid.x, centroid.y, centroid.z);
     }, [grid]);
 

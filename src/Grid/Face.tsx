@@ -8,7 +8,7 @@ import Model from "./Model";
 
 export default function Face(props: FaceProps & { blockId: string, scale: number }) {
     const dispatch = useAppDispatch();
-    const model = useAppSelector(state => state.grid.nextModel);
+    const model = useAppSelector(state => state.grid.present.nextModel);
 
     const [hovered, setHover] = useState(false);
 
