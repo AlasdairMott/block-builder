@@ -44,10 +44,11 @@ const Viewport3d = () => {
     return (
         <>
             <Canvas camera={{ position: [10, 10, 10] }} shadows={true} onKeyDown={handleKeyPress}>
+                <color attach="background" args={[0.9,0.9,0.9]} />
                 <OrbitControls target={[0, 0, 0]} ref={orbitControls}/>
                 <ambientLight intensity={0.2} />
                 <directionalLight
-                    position={[100, 100, 100]}
+                    position={[100, 200, 100]}
                     castShadow={true}
                     shadow-camera-right={10}
                     shadow-camera-left={-10}
