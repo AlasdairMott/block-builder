@@ -7,7 +7,8 @@ import styles from "./ToolbarButton.module.css";
 const ICONPROPS = {
     strokeWidth: "2px",
     height: 18,
-    width: 22
+    width: 22,
+    color: "black"
 }
 
 const ToolbarToolButton = (props: { mode: ActiveTool; }) => {
@@ -21,8 +22,8 @@ const ToolbarToolButton = (props: { mode: ActiveTool; }) => {
     }
 
     const iconProps = {
-        color: active ? "white" : "black",
-        ...ICONPROPS
+        ...ICONPROPS,
+        color: active ? "white" : "black"
     }
 
     const style = active ? `${styles.toolbarButton} ${styles.toolbarButton__active}` : styles.toolbarButton;
