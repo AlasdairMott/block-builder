@@ -34,7 +34,7 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
             blockId: props.blockId,
             model: model
         }));
-        dispatch(modelActions.nextBlock());
+        dispatch(modelActions.randomBlock());
 
         e.stopPropagation();
     };

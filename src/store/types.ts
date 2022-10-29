@@ -10,7 +10,7 @@ export type CellProps = {
 export type ModelProps = {
     name: string;
     rotation: number;
-    color: string | Color;
+    color: string;
 }
 
 export {}

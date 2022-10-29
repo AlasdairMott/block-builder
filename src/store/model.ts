@@ -12,7 +12,8 @@ const COLOR = [
     "rgb(255,0,0)",
     "rgb(255,190,20)",
     "rgb(0,0,255)",
-    "rgb(255,255,255)"
+    "rgb(255,255,255)",
+    "rgb(50,200,50)",
 ]
 
 export function GetRandomModel(): ModelProps {
@@ -39,10 +40,13 @@ const modelSlice = createSlice({
             }
         },
         nextBlock: (state) => {
-            state.model = GetRandomModel();
+            state.model.name = MODELS[(MODELS.indexOf(state.model.name) + 1) % MODELS.length];
         },
         nextColor: (state) => {
-            state.model.color = COLOR[Math.floor(Math.random() * COLOR.length)];
+            state.model.color = COLOR[(COLOR.indexOf(state.model.color) + 1) % COLOR.length];
+        },
+        randomBlock: (state) => {
+            state.model = GetRandomModel();
         }
     }
 });

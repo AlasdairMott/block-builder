@@ -9,7 +9,7 @@ import { modelActions } from '../store/model';
 import { CellProps } from '../store/types';
 import { ActiveTool } from '../store/ui';
 import Face from './Face';
-import Model from './Model';
+import { ModelAnimated } from './Model';
 
 export type FaceProps = {
     faceId: Direction;
@@ -77,7 +77,7 @@ export function Cell(props: CellProps) {
     return (
         <group position={props.position}>
             <mesh visible={props.active}>
-                {props.active && <Model {...model}/>}
+                {props.active && <ModelAnimated {...model}/>}
             </mesh>
             {props.active && mode === ActiveTool.Add &&
                 faces.map((face: FaceProps, index: number) => {
