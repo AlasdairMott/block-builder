@@ -5,6 +5,7 @@ import { ActionCreators } from 'redux-undo';
 import { OrbitControls as Orbit } from 'three-stdlib';
 import { Grid } from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
+import { modelActions } from "../store/model";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { ActiveTool, changeMode } from '../store/ui';
 import Toolbar from '../UI/Toolbar';
@@ -26,7 +27,7 @@ const Viewport3d = () => {
             case 's': dispatch(changeMode({ mode: ActiveTool.Subtract })); break;
             case 'v': dispatch(changeMode({ mode: ActiveTool.Select })); break;
             case 'f': zoomExtents(); break;
-            case 'z': 
+            case 'z':
             case 'Z':
                 if (event.metaKey || event.ctrlKey) {
                     if (event.shiftKey) {
@@ -34,7 +35,11 @@ const Viewport3d = () => {
                     } else {
                         dispatch(ActionCreators.undo());
                     }
-                }
+                } break;
+            case 'ArrowLeft': dispatch(modelActions.rotateBlock('left')); break;
+            case 'ArrowRight': dispatch(modelActions.rotateBlock('right')); break;
+            case 'ArrowUp': dispatch(modelActions.nextBlock()); break;
+            case 'ArrowDown': dispatch(modelActions.nextColor()); break;
         }
     }, [zoomExtents, dispatch]);
 

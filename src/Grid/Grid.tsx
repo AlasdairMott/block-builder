@@ -1,5 +1,5 @@
-import { CellProps } from '../store/grid';
 import { useAppSelector } from '../store/hooks';
+import { CellProps } from '../store/types';
 import { Cell } from "./Cell";
 
 export function Grid() {

@@ -1,41 +1,10 @@
-import { Color } from '@react-three/fiber';
 import { createSlice } from '@reduxjs/toolkit';
 import { Vector3 } from 'three';
 import { Direction } from '../Grid/Cell';
-
-const MODELS = [
-    "1x1_Arch",
-    "1x1_Cylinder",
-    "1x1_HalfArch",
-    "1x1_Slope"
-]
-
-const COLOR = [
-    "rgb(255,0,0)",
-    "rgb(255,190,20)",
-    "rgb(0,0,255)",
-    "rgb(255,255,255)"
-]
-
-export type CellProps = {
-    blockId: string;
-    position: [x: number, y: number, z: number],
-    active: boolean;
-    model: ModelProps | null;
-}
-
-export type ModelProps = {
-    name: string;
-    rotation: number;
-    color: string | Color;
-}
+import { GetRandomModel } from './model';
+import { CellProps } from './types';
 
 type cellMap = { [k: string]: CellProps };
-
-export type GridState = {
-    cells: cellMap;
-    nextModel: ModelProps;
-}
 
 export function getGridCentroid(cells: cellMap): Vector3 {
     let min: Vector3 = new Vector3(Infinity, Infinity, Infinity);
@@ -88,22 +57,11 @@ export function createCellMap(): cellMap {
     return cells;
 }
 
-function GetRandomModel(): ModelProps {
-    return {
-        name: MODELS[Math.floor(Math.random() * MODELS.length)],
-        rotation: Math.PI * 0.5 * Math.floor(Math.random() * 4),
-        color: COLOR[Math.floor(Math.random() * COLOR.length)]
-    }
-}
-
-const initialState = {
-    cells: createCellMap(),
-    nextModel: GetRandomModel()
-};
-
 const gridSlice = createSlice({
     name: 'grid',
-    initialState: initialState, //(initialState as any) as StateWithHistory<typeof initialState>,
+    initialState: {
+        cells: createCellMap(),
+    }, //(initialState as any) as StateWithHistory<typeof initialState>,
     reducers: {
         newFile: (state) => {
             state.cells = createCellMap();
@@ -125,20 +83,14 @@ const gridSlice = createSlice({
 
             if (state.cells[neighbourId] && !state.cells[neighbourId].active) {
                 state.cells[neighbourId].active = true;
-                state.cells[neighbourId].model = state.nextModel;
+                state.cells[neighbourId].model = action.payload.model;
             }
-
-            state.nextModel = GetRandomModel();
         },
         subtractBlock: (state, action) => {
             const blockId = action.payload.blockId;
             if (state.cells[blockId] && state.cells[blockId].active) {
                 state.cells[blockId].active = false;
             }
-        },
-        selectBlock: (state, action) => {
-            const blockId = action.payload.blockId;
-            state.nextModel = state.cells[blockId].model ?? GetRandomModel();
         }
     }
 });

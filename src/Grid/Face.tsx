@@ -4,12 +4,13 @@ import { useRef, useState } from 'react';
 import { Group } from "three";
 import { gridActions } from '../store/grid';
 import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { modelActions } from "../store/model";
 import { FaceProps } from "./Cell";
 import Model from "./Model";
 
 export default function Face(props: FaceProps & { blockId: string, scale: number }) {
     const dispatch = useAppDispatch();
-    const model = useAppSelector(state => state.grid.present.nextModel);
+    const model = useAppSelector(state => state.model.model);
 
     // ref for the floating preview
     const hoverPreview = useRef<Group>(null!);
@@ -30,8 +31,10 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
         setHover(false);
         dispatch(gridActions.addBlock({
             faceId: props.faceId,
-            blockId: props.blockId
+            blockId: props.blockId,
+            model: model
         }));
+        dispatch(modelActions.nextBlock());
 
         e.stopPropagation();
     };
