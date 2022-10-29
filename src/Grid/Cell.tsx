@@ -3,11 +3,13 @@ import { ThreeEvent } from '@react-three/fiber';
 import { useState } from 'react';
 import * as THREE from 'three';
 import { Euler } from 'three';
-import { CellProps, gridActions } from '../store/grid';
+import { gridActions } from '../store/grid';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { modelActions } from '../store/model';
+import { CellProps } from '../store/types';
 import { ActiveTool } from '../store/ui';
 import Face from './Face';
-import Model from './Model';
+import { ModelAnimated } from './Model';
 
 export type FaceProps = {
     faceId: Direction;
@@ -63,8 +65,8 @@ export function Cell(props: CellProps) {
     };
 
     const selectHandler = (e: ThreeEvent<MouseEvent>) => {
-        dispatch(gridActions.selectBlock({
-            blockId: props.blockId
+        dispatch(modelActions.selectBlock({
+            model: model
         }));
 
         e.stopPropagation();
@@ -75,7 +77,7 @@ export function Cell(props: CellProps) {
     return (
         <group position={props.position}>
             <mesh visible={props.active}>
-                {props.active && <Model {...model}/>}
+                {props.active && <ModelAnimated {...model}/>}
             </mesh>
             {props.active && mode === ActiveTool.Add &&
                 faces.map((face: FaceProps, index: number) => {

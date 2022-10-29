@@ -5,7 +5,7 @@ import { useAppSelector } from "../store/hooks";
 import styles from "./Preview.module.css";
 
 const Preview = () => {
-    const nextModel = useAppSelector(state => state.grid.present.nextModel);
+    const nextModel = useAppSelector(state => state.model.model);
 
     return (
         <div className={`${styles.preview} glass`}>
