@@ -12,10 +12,10 @@ import Toolbar from '../UI/Toolbar';
 const Viewport3d = () => {
     const dispatch = useAppDispatch();
     const orbitControls = useRef<Orbit>(null);
-    const grid = useAppSelector(state => state.grid);
+    const grid = useAppSelector(state => state.grid.present);
 
     const zoomExtents = useCallback(() => {
-        const centroid = getGridCentroid(grid.present.cells);
+        const centroid = getGridCentroid(grid.cells);
         orbitControls.current?.target.set(centroid.x, centroid.y, centroid.z);
     }, [grid]);
 
