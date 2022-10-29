@@ -1,5 +1,3 @@
-import { Color } from '@react-three/fiber';
-
 export type CellProps = {
     blockId: string;
     position: [x: number, y: number, z: number],
@@ -13,4 +11,4 @@ export type ModelProps = {
     color: string;
 }
 
-export {}
+export { };

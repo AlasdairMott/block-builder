@@ -11,7 +11,7 @@ const Model = ({ name, rotation, color, ...props }) => {
     const useWireframe = !props.wireframe;
 
     return (
-        <group name="1x1" scale={[1, 0.8, 1]} position={[-0.5, 0.62, -0.5]}>
+        <group name="1x1" scale={[1, 0.8, 1]} position={[-0.5, 0.5, -0.5]}>
             {useWireframe && <mesh
                 castShadow
                 receiveShadow
@@ -33,14 +33,13 @@ const Model = ({ name, rotation, color, ...props }) => {
 const ModelAnimated = ({ name, rotation, color, ...props }) => {
     const ref = useRef(null);
 
-    const [scale] = useState({ scale: [1, 1, 1] });
+    const [state] = useState({ scale: [1, 1, 1] });
 
-    const transition = useTransition(scale, {
+    const transition = useTransition(state, {
         from: { scale: [0.8, 0.8, 0.8] },
         enter: { scale: [1, 1, 1] },
         leave: { scale: [0.1, 0.1, 0.1] },
         config: { mass: 1, tension: 2000, friction: 80 },
-        trail: 2
     });
 
     return (
