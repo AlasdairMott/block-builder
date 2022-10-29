@@ -57,6 +57,18 @@ export function createCellMap(): cellMap {
     return cells;
 }
 
+export function getNeighbourId(cellId: string, direction: Direction): string {
+    const [x, y, z] = cellId.split('-').map(x => parseInt(x));
+    switch (direction) {
+        case Direction.xPos: return `${x + 1}-${y}-${z}`;
+        case Direction.xNeg: return `${x - 1}-${y}-${z}`;
+        case Direction.yPos: return `${x}-${y + 1}-${z}`;
+        case Direction.yNeg: return `${x}-${y - 1}-${z}`;
+        case Direction.zPos: return `${x}-${y}-${z + 1}`;
+        case Direction.zNeg: return `${x}-${y}-${z - 1}`;
+    }
+}
+
 const gridSlice = createSlice({
     name: 'grid',
     initialState: {
@@ -67,19 +79,7 @@ const gridSlice = createSlice({
             state.cells = createCellMap();
         },
         addBlock: (state, action) => {
-
-            const position = action.payload.blockId.split('-').map(Number) as [x: number, y: number, z: number];
-
-            switch (action.payload.faceId) {
-                case (Direction.xPos): position[0] += 1; break;
-                case (Direction.xNeg): position[0] -= 1; break;
-                case (Direction.yPos): position[1] += 1; break;
-                case (Direction.yNeg): position[1] -= 1; break;
-                case (Direction.zPos): position[2] += 1; break;
-                case (Direction.zNeg): position[2] -= 1; break;
-            }
-
-            const neighbourId = position.join('-');
+            const neighbourId = getNeighbourId(action.payload.blockId, action.payload.faceId);
 
             if (state.cells[neighbourId] && !state.cells[neighbourId].active) {
                 state.cells[neighbourId].active = true;
