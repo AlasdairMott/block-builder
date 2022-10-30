@@ -22,7 +22,6 @@ const  Toolbar: React.FC<{ onZoomExtents: () => void, onNewFile: () => void } & 
             <div className={`${styles.toolbar} glass`}>
                 <ToolbarToolButton mode={ActiveTool.Add} />
                 <ToolbarToolButton mode={ActiveTool.Subtract} />
-                <ToolbarToolButton mode={ActiveTool.Select} />
                 <ToolbarCommandButton command={Command.ZoomExtents} onClick={props.onZoomExtents} />
                 <ToolbarCommandButton command={Command.New} onClick={props.onNewFile} />
                 <ToolbarCommandButton command={Command.Undo} onClick={() => dispatch(ActionCreators.undo())} />

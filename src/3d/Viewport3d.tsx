@@ -25,7 +25,6 @@ const Viewport3d = () => {
             case 'a': dispatch(changeMode({ mode: ActiveTool.Add })); break;
             case 'e':
             case 's': dispatch(changeMode({ mode: ActiveTool.Subtract })); break;
-            case 'v': dispatch(changeMode({ mode: ActiveTool.Select })); break;
             case 'f': zoomExtents(); break;
             case 'z':
             case 'Z':

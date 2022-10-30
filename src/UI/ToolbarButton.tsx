@@ -1,4 +1,4 @@
-import { CursorPointer, EmptyPage, Erase, Home, Redo, Svg3DSelectSolid, Undo } from "iconoir-react";
+import { EmptyPage, Erase, Home, Redo, Svg3DSelectSolid, Undo } from "iconoir-react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { ActiveTool, changeMode } from "../store/ui";
 import { Command } from "./Toolbar";
@@ -31,7 +31,6 @@ const ToolbarToolButton = (props: { mode: ActiveTool; }) => {
         <button className={style} onClick={handleClick} title={ActiveTool[props.mode]}>
             {props.mode === ActiveTool.Add && <Svg3DSelectSolid {...iconProps} />}
             {props.mode === ActiveTool.Subtract && <Erase {...iconProps} />}
-            {props.mode === ActiveTool.Select && <CursorPointer {...iconProps} />}
         </button>
     );
 }

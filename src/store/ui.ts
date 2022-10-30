@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export enum ActiveTool {
     Add,
-    Subtract,
-    Select
+    Subtract
 }
 
 export type uiState = {
