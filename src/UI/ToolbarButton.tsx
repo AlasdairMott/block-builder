@@ -4,10 +4,8 @@ import { ActiveTool, changeMode } from "../store/ui";
 import { Command } from "./Toolbar";
 import styles from "./ToolbarButton.module.css";
 
-const ICONPROPS = {
+export const ICONPROPS = {
     strokeWidth: "2px",
-    height: 18,
-    width: 22,
     color: "black"
 }
 

@@ -11,6 +11,7 @@ import { modelActions } from "../store/model";
 import { ActiveTool, changeMode, toggleSound } from '../store/ui';
 import RoundButton from "../UI/RoundButton";
 import Toolbar from '../UI/Toolbar';
+import { ICONPROPS } from "../UI/ToolbarButton";
 
 const Viewport3d = () => {
     const dispatch = useAppDispatch();
@@ -81,7 +82,7 @@ const Viewport3d = () => {
             </Canvas>
             <Toolbar onZoomExtents={zoomExtents} onNewFile={handleNewFile}></Toolbar>
             <RoundButton onClick={() => dispatch(toggleSound())}>
-                {muted ? <SoundOff strokeWidth={"2px"}></SoundOff> : <SoundHigh strokeWidth={"2px"}></SoundHigh>}
+                {muted ? <SoundOff {...ICONPROPS}/> : <SoundHigh {...ICONPROPS}/>}
             </RoundButton>
         </>
     );
