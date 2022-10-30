@@ -1,4 +1,4 @@
-import { Box } from '@react-three/drei';
+import { Box, Edges } from '@react-three/drei';
 import { ThreeEvent } from '@react-three/fiber';
 import { useState } from 'react';
 import * as THREE from 'three';
@@ -9,7 +9,6 @@ import { modelActions } from '../store/model';
 import { CellProps } from '../store/types';
 import { ActiveTool } from '../store/ui';
 import Face from './Face';
-import HoverCube from './HoverCube';
 import { ModelAnimated } from './Model';
 
 export type FaceProps = {
@@ -32,7 +31,7 @@ export function Cell(props: CellProps) {
 
     const mode = useAppSelector(state => state.ui.mode);
     const model = useAppSelector(state => state.grid.present.cells[props.blockId].model!);
-    
+
     const [hovered, setHover] = useState(false);
 
     const F = 0.5; // face size
@@ -47,7 +46,6 @@ export function Cell(props: CellProps) {
     ]
 
     const enterHandler = (e: ThreeEvent<PointerEvent>) => {
-        console.log('enter');
         setHover(true);
         e.stopPropagation();
     };
@@ -79,7 +77,7 @@ export function Cell(props: CellProps) {
     return (
         <group position={props.position}>
             <mesh visible={props.active}>
-                {props.active && <ModelAnimated {...model}/>}
+                {props.active && <ModelAnimated {...model} />}
             </mesh>
             {props.active && mode === ActiveTool.Add &&
                 faces.map((face: FaceProps, index: number) => {
@@ -89,15 +87,18 @@ export function Cell(props: CellProps) {
                         blockId={props.blockId}
                         scale={F * 2}
                         position={face.position}
-                        rotation={face.rotation}/>
+                        rotation={face.rotation} />
                     )
                 })
             }
             {props.active && mode === ActiveTool.Subtract &&
-                // <Box scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={subtractHandler}>
-                //     <meshLambertMaterial color="red" transparent={true} opacity={opacity} />
-                // </Box>
-                <HoverCube scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={subtractHandler}></HoverCube>
+                <mesh visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={subtractHandler}>
+                    <boxGeometry args={[1.1, 1.1, 1.1]} />
+                    <meshStandardMaterial transparent={true} opacity={0} color="red" />
+                    <Edges>
+                        <lineBasicMaterial attach="material" color="red" linewidth={0.5} />
+                    </Edges>
+                </mesh>
             }
             {props.active && mode === ActiveTool.Select &&
                 <Box scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={selectHandler}>
