@@ -1,6 +1,6 @@
 import { Edges } from '@react-three/drei';
 import { ThreeEvent } from '@react-three/fiber';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { Euler } from 'three';
 import { gridActions } from '../store/grid';
@@ -30,8 +30,12 @@ export function Cell(props: CellProps) {
 
     const mode = useAppSelector(state => state.ui.mode);
     const model = useAppSelector(state => state.grid.present.cells[props.blockId].model!);
-
+    
     const [hovered, setHover] = useState(false);
+
+    useEffect(() => {
+        setHover(hovered ? mode === ActiveTool.Subtract : false);
+    }, [hovered, mode]);
 
     const F = 0.5; // face size
 
