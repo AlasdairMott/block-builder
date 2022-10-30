@@ -6,6 +6,7 @@
     padding: 12px;
     border-width: 0.1px;
     border-color: transparent;
+    display: flex;
 }
 
 .toolbarButton__active {

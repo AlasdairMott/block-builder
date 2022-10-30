@@ -1,19 +1,23 @@
 import { OrbitControls, Plane } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { SoundHigh, SoundOff } from "iconoir-react";
 import { useCallback, useEffect, useRef } from "react";
 import { ActionCreators } from 'redux-undo';
 import { OrbitControls as Orbit } from 'three-stdlib';
 import { Grid } from '../Grid/Grid';
-import { getGridCentroid, gridActions } from "../store/grid";
+import { getGridCentroid, gridActions, sound } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
-import { ActiveTool, changeMode } from '../store/ui';
+import { ActiveTool, changeMode, toggleSound } from '../store/ui';
+import RoundButton from "../UI/RoundButton";
 import Toolbar from '../UI/Toolbar';
 
 const Viewport3d = () => {
     const dispatch = useAppDispatch();
     const orbitControls = useRef<Orbit>(null);
     const grid = useAppSelector(state => state.grid.present);
+
+    const muted = useAppSelector(state => state.ui.muted);
 
     const zoomExtents = useCallback(() => {
         const centroid = getGridCentroid(grid.cells);
@@ -76,6 +80,9 @@ const Viewport3d = () => {
                 </Plane>
             </Canvas>
             <Toolbar onZoomExtents={zoomExtents} onNewFile={handleNewFile}></Toolbar>
+            <RoundButton onClick={() => dispatch(toggleSound())}>
+                {muted ? <SoundOff strokeWidth={"2px"}></SoundOff> : <SoundHigh strokeWidth={"2px"}></SoundHigh>}
+            </RoundButton>
         </>
     );
 };

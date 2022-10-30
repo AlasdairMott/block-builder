@@ -69,6 +69,8 @@ export function getNeighbourId(cellId: string, direction: Direction): string {
     }
 }
 
+export const sound = new Audio('/sounds/place.wav');
+
 const gridSlice = createSlice({
     name: 'grid',
     initialState: {
@@ -84,6 +86,8 @@ const gridSlice = createSlice({
             if (state.cells[neighbourId] && !state.cells[neighbourId].active) {
                 state.cells[neighbourId].active = true;
                 state.cells[neighbourId].model = action.payload.model;
+
+                sound.play();
             }
         },
         subtractBlock: (state, action) => {
