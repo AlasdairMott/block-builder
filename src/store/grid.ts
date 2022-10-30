@@ -84,6 +84,10 @@ const gridSlice = createSlice({
             if (state.cells[neighbourId] && !state.cells[neighbourId].active) {
                 state.cells[neighbourId].active = true;
                 state.cells[neighbourId].model = action.payload.model;
+
+                // play sound
+                const sound = new Audio('/sounds/place.wav');
+                sound.play();
             }
         },
         subtractBlock: (state, action) => {

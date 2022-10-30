@@ -31,8 +31,7 @@ const Model = ({ name, rotation, color, ...props }) => {
 };
 
 const ModelAnimated = ({ name, rotation, color, ...props }) => {
-    const ref = useRef(null);
-
+    
     const transition = useTransition(true, {
         from: { scale: [0.8, 0.8, 0.8] },
         enter: { scale: [1, 1, 1] },
@@ -44,7 +43,7 @@ const ModelAnimated = ({ name, rotation, color, ...props }) => {
         <>
             {transition((props, item) => item &&
                 <>
-                    <animated.group dispose={null} scale={props.scale} ref={ref}>
+                    <animated.group dispose={null} scale={props.scale}>
                         <Model name={name} rotation={rotation} color={color} wireframe={props.wireframe} {...props}></Model>
                     </animated.group>
                 </>
