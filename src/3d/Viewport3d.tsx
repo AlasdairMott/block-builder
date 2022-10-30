@@ -5,8 +5,8 @@ import { ActionCreators } from 'redux-undo';
 import { OrbitControls as Orbit } from 'three-stdlib';
 import { Grid } from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
-import { modelActions } from "../store/model";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { modelActions } from "../store/model";
 import { ActiveTool, changeMode } from '../store/ui';
 import Toolbar from '../UI/Toolbar';
 

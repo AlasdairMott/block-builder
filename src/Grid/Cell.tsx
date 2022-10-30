@@ -9,6 +9,7 @@ import { modelActions } from '../store/model';
 import { CellProps } from '../store/types';
 import { ActiveTool } from '../store/ui';
 import Face from './Face';
+import HoverCube from './HoverCube';
 import { ModelAnimated } from './Model';
 
 export type FaceProps = {
@@ -46,6 +47,7 @@ export function Cell(props: CellProps) {
     ]
 
     const enterHandler = (e: ThreeEvent<PointerEvent>) => {
+        console.log('enter');
         setHover(true);
         e.stopPropagation();
     };
@@ -92,9 +94,10 @@ export function Cell(props: CellProps) {
                 })
             }
             {props.active && mode === ActiveTool.Subtract &&
-                <Box scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={subtractHandler}>
-                    <meshLambertMaterial color="red" transparent={true} opacity={opacity} />
-                </Box>
+                // <Box scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={subtractHandler}>
+                //     <meshLambertMaterial color="red" transparent={true} opacity={opacity} />
+                // </Box>
+                <HoverCube scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={subtractHandler}></HoverCube>
             }
             {props.active && mode === ActiveTool.Select &&
                 <Box scale={1.1} visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={selectHandler}>
