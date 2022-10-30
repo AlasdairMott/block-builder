@@ -26,6 +26,7 @@ const Viewport3d = () => {
             case 'e':
             case 's': dispatch(changeMode({ mode: ActiveTool.Subtract })); break;
             case 'f': zoomExtents(); break;
+            case "n": dispatch(gridActions.newFile()); break;
             case 'z':
             case 'Z':
                 if (event.metaKey || event.ctrlKey) {

@@ -9,11 +9,16 @@ const MODELS = [
 ]
 
 const COLOR = [
-    "rgb(255,0,0)",
-    "rgb(255,190,20)",
-    "rgb(0,0,255)",
-    "rgb(255,255,255)",
-    "rgb(50,200,50)",
+    "#FFB9B9",
+    "#FFDDD2",
+    "#FFACC7",
+    "#FF8DC7",
+    "#ed4b11",
+    "#ff7b63",
+    "#FBBEB7",
+    "#FC9E5E",
+    "#EACDD2",
+    "#D41B00"
 ]
 
 export function GetRandomModel(): ModelProps {
