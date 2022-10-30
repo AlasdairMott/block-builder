@@ -69,6 +69,8 @@ export function getNeighbourId(cellId: string, direction: Direction): string {
     }
 }
 
+export const sound = new Audio('/sounds/place.wav');
+
 const gridSlice = createSlice({
     name: 'grid',
     initialState: {
@@ -85,8 +87,6 @@ const gridSlice = createSlice({
                 state.cells[neighbourId].active = true;
                 state.cells[neighbourId].model = action.payload.model;
 
-                // play sound
-                const sound = new Audio('/sounds/place.wav');
                 sound.play();
             }
         },

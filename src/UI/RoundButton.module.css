@@ -1,0 +1,21 @@
+.roundButton {
+    border-radius: 50%;
+    border-style: inset;
+    background-color: white;
+    cursor: pointer;
+    padding: 12px;
+    border-width: 0.1px;
+    border-color: transparent;
+
+
+    bottom: 20px;
+    right: 20px;
+    /* padding: 18px; */
+    position: absolute;
+    /* margin: auto; */
+    display: flex;
+}
+
+.roundButton:hover {
+    border-color: black;
+}
