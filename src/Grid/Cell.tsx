@@ -55,7 +55,6 @@ export function Cell(props: CellProps) {
     };
 
     const subtractHandler = (e: ThreeEvent<MouseEvent>) => {
-        setHover(false);
         dispatch(gridActions.subtractBlock({
             blockId: props.blockId
         }));
@@ -65,10 +64,8 @@ export function Cell(props: CellProps) {
 
     return (
         <group position={props.position}>
-            <mesh visible={props.active}>
-                {props.active && <ModelAnimated {...model} />}
-            </mesh>
-            {props.active && mode === ActiveTool.Add &&
+            <ModelAnimated {...model}/>
+            {mode === ActiveTool.Add &&
                 faces.map((face: FaceProps, index: number) => {
                     return (<Face
                         key={index}
@@ -80,7 +77,7 @@ export function Cell(props: CellProps) {
                     )
                 })
             }
-            {props.active && mode === ActiveTool.Subtract &&
+            {mode === ActiveTool.Subtract &&
                 <mesh visible={hovered} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={subtractHandler}>
                     <boxGeometry args={[1.1, 1.1, 1.1]} />
                     <meshStandardMaterial transparent={true} opacity={0} color="red" />
@@ -90,6 +87,5 @@ export function Cell(props: CellProps) {
                 </mesh>
             }
         </group>
-
     );
 };

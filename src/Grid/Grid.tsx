@@ -8,12 +8,12 @@ export function Grid() {
     return (
         <>
             {Object.values<CellProps>(grid.cells).map((cell: CellProps) => {
-                return (
+                return cell.active ? (
                     <Cell
                         {...cell}
                         key={cell.blockId}
                     />
-                );
+                ) : null;;
             })}
         </>
     );
