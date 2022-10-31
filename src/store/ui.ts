@@ -8,14 +8,16 @@ export enum ActiveTool {
 
 export type uiState = {
     mode: ActiveTool,
-    muted: boolean
+    muted: boolean,
+    perspective: boolean,
 }
 
 const uiSlice = createSlice({
     name: 'ui',
     initialState: {
         mode: ActiveTool.Add,
-        muted: false
+        muted: false,
+        perspective: false,
     },
     reducers: {
         changeMode: (state, action) => {
@@ -24,9 +26,12 @@ const uiSlice = createSlice({
         toggleSound: (state) => {
             sound.muted = !sound.muted;
             state.muted = sound.muted;
+        },
+        togglePerspective: (state) => {
+            state.perspective = !state.perspective;
         }
     }
 });
 
 export default uiSlice.reducer;
-export const { changeMode, toggleSound } = uiSlice.actions;
+export const { changeMode, toggleSound, togglePerspective } = uiSlice.actions;

@@ -1,4 +1,4 @@
-import { EmptyPage, Erase, Home, Redo, Svg3DSelectSolid, Undo } from "iconoir-react";
+import { EmptyPage, Erase, Home, PerspectiveView, Redo, Svg3DSelectSolid, Undo } from "iconoir-react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { ActiveTool, changeMode } from "../store/ui";
 import { Command } from "./Toolbar";
@@ -39,6 +39,7 @@ export const ToolbarCommandButton = (props: { command: Command; onClick: React.M
     return (
         <button className={style} onClick={props.onClick} title={Command[props.command]}>
             {props.command === Command.ZoomExtents && <Home {...ICONPROPS}/>}
+            {props.command === Command.TogglePerspective && <PerspectiveView {...ICONPROPS}/>}
             {props.command === Command.New && <EmptyPage {...ICONPROPS}/>}
             {props.command === Command.Undo && <Undo {...ICONPROPS}/>}
             {props.command === Command.Redo && <Redo {...ICONPROPS}/>}
