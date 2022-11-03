@@ -1,12 +1,15 @@
 import { GetRandomModel } from '../store/model';
 import { cellMap } from './../store/types';
 
+/**
+ * Working from the top down, find the first active cell and add a cell above it.
+ * @param cellMap The cell map to add the cells to.
+ * @param dimensions The dimensions of the cell map.
+ * @returns cellMap with new cells added
+ */
 function addLayer(cellMap: cellMap, dimensions: [number, number, number]): cellMap {
 
     const [xSize, ySize, zSize] = dimensions;
-
-    // working from the top down, find the first active cell
-    // and add a cell above it
 
     for (let x = 0; x < xSize; x++) {
         for (let z = 0; z < zSize; z++) {
@@ -18,7 +21,6 @@ function addLayer(cellMap: cellMap, dimensions: [number, number, number]): cellM
 
                 if (cell.active) {
                     idNext = `${x}-${y + 1}-${z}`;
-
                 } else if (y === 0) {
                     idNext = `${x}-${y}-${z}`;
                 } else {
