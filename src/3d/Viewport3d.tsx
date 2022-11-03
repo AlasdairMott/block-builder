@@ -32,6 +32,8 @@ const Viewport3d = () => {
         }),
     }, [grid]);
 
+    let noiseSize = 10;
+    let noiseThreshold = 0.5;
     useControls("modifiers", {
         addLayer: button(() => {
             console.log('addLayer');
@@ -41,7 +43,29 @@ const Viewport3d = () => {
             console.log('subtractLayer');
             dispatch(gridActions.subtractLayer());
         }),
-        
+        addNoise3d: button(() => {
+            console.log('addNoise3d');
+            dispatch(gridActions.addNoise3d({size: noiseSize, threshold: noiseThreshold}));
+        }),
+        addNoise2d: button(() => {
+            console.log('addNoise2d');
+            dispatch(gridActions.addNoise2d({size: noiseSize, threshold: noiseThreshold}));
+        }),
+        noiseSize: {
+            value: noiseSize,
+            min: 0,
+            onChange: (value) => {
+                noiseSize = value;
+            }
+        },
+        noiseThreshold: {
+            value: noiseThreshold,
+            min: 0,
+            max: 1,
+            onChange: (value) => {
+                noiseThreshold = value;
+            }
+        },
     });
 
     const dispatch = useAppDispatch();

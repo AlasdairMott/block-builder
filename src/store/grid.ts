@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Vector3 } from 'three';
 import { addLayer, subtractLayer } from '../functions/addLayer';
+import { perlinEffector } from '../functions/perlinEffector';
 import { Direction } from '../Grid/Cell';
 import { GetRandomModel } from './model';
 import { cellMap } from './types';
@@ -105,6 +106,12 @@ const gridSlice = createSlice({
         },
         subtractLayer: (state) => {
             state.cells = subtractLayer(state);
+        },
+        addNoise3d: (state, action) => {
+            state.cells = new perlinEffector().addNoise3d(state, action.payload.size, action.payload.threshold);
+        },
+        addNoise2d: (state, action) => {
+            state.cells = new perlinEffector().addNoise2d(state, action.payload.size, action.payload.threshold);
         }
     }
 });
