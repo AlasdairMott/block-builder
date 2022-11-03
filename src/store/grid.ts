@@ -77,6 +77,11 @@ const gridSlice = createSlice({
         size: size
     },
     reducers: {
+        readFile: (state, action) => {
+            const { cells, size } = action.payload;
+            state.cells = cells;
+            state.size = size;
+        },
         newFile: (state) => {
             state.cells = createCellMap(...size);
         },

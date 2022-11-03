@@ -13,23 +13,39 @@ import RoundButton from "../UI/RoundButton";
 import Toolbar from '../UI/Toolbar';
 import { ICONPROPS } from "../UI/ToolbarButton";
 import { button, Leva, useControls } from 'leva';
+import Serializer from "../utils/serialization";
 
 const Viewport3d = () => {
 
-    const controls = useControls({
-        addLayer: button(() => { 
+    const grid = useAppSelector(state => state.grid.present);
+
+    useControls("IO", {
+        saveJson: button(() => {
+            console.log('saveJson');
+            Serializer.save(new Blob([JSON.stringify(grid, null, "\t")], { type: "application/json" }), "grid.json");
+        }),
+        readJson: button(() => {
+            console.log('readJson');
+            Serializer.readJson().then((json) => {
+                dispatch(gridActions.readFile(json));
+            });
+        }),
+    }, [grid]);
+
+    useControls("modifiers", {
+        addLayer: button(() => {
             console.log('addLayer');
-            dispatch(gridActions.addLayer());  
+            dispatch(gridActions.addLayer());
         }),
         subtractLayer: button(() => {
             console.log('subtractLayer');
             dispatch(gridActions.subtractLayer());
         }),
+        
     });
 
     const dispatch = useAppDispatch();
 
-    const grid = useAppSelector(state => state.grid.present);
 
     const muted = useAppSelector(state => state.ui.muted);
     const isPerspective = useAppSelector(state => state.ui.perspective);
@@ -90,7 +106,7 @@ const Viewport3d = () => {
 
     return (
         <>
-            <Leva hidden={window.location.hash !== '#debug'}/>
+            <Leva hidden={window.location.hash !== '#debug'} />
             <Canvas shadows={true} onKeyDown={handleKeyPress}>
                 <color attach="background" args={[0.9, 0.9, 0.9]} />
 
@@ -106,7 +122,7 @@ const Viewport3d = () => {
                     shadow-camera-left={-10}
                     shadow-camera-top={10}
                     shadow-camera-bottom={-10} intensity={0.8} />
-                    
+
                 <Grid />
                 <Plane receiveShadow={true} scale={100} rotation-x={-Math.PI * 0.5} position-y={-0.5}>
                     <shadowMaterial opacity={0.1} />
