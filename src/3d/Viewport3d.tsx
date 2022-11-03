@@ -21,6 +21,10 @@ const Viewport3d = () => {
             console.log('addLayer');
             dispatch(gridActions.addLayer());  
         }),
+        subtractLayer: button(() => {
+            console.log('subtractLayer');
+            dispatch(gridActions.subtractLayer());
+        }),
     });
 
     const dispatch = useAppDispatch();

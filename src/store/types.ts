@@ -11,3 +11,8 @@ export type CellProps = {
 }
 
 export type cellMap = { [k: string]: CellProps };
+
+export type gridState = {
+    cells: cellMap;
+    size: [number, number, number];
+}

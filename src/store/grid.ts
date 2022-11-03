@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Vector3 } from 'three';
-import addLayer from '../functions/addLayer';
+import { addLayer, subtractLayer } from '../functions/addLayer';
 import { Direction } from '../Grid/Cell';
 import { GetRandomModel } from './model';
 import { cellMap } from './types';
@@ -96,8 +96,11 @@ const gridSlice = createSlice({
             }
         },
         addLayer: (state) => {
-            state.cells = addLayer(state.cells, state.size);
+            state.cells = addLayer(state);
         },
+        subtractLayer: (state) => {
+            state.cells = subtractLayer(state);
+        }
     }
 });
 
