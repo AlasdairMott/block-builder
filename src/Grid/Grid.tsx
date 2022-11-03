@@ -8,7 +8,7 @@ export function Grid() {
     return (
         <>
             {Object.values<CellProps>(grid.cells).map((cell: CellProps) => {
-                return cell.active ? (
+                return cell.model ? (
                     <Cell
                         {...cell}
                         key={cell.blockId}

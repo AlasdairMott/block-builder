@@ -11,7 +11,7 @@ export function getGridCentroid(cells: cellMap): Vector3 {
 
     //find the min x, y, z and max x, y, z
     for (const cell of Object.values(cells)) {
-        if (cell.active) {
+        if (cell.model !== null) {
             const { position } = cell;
 
             // could be simplified in an extension method for Vector3
@@ -45,7 +45,6 @@ export function createCellMap(xSize: number, ySize: number, zSize: number): cell
                 cells[id] = {
                     blockId: id,
                     position: position,
-                    active: active,
                     model: active ? GetRandomModel() : null
                 };
             }
@@ -84,8 +83,7 @@ const gridSlice = createSlice({
         addBlock: (state, action) => {
             const neighbourId = getNeighbourId(action.payload.blockId, action.payload.faceId);
 
-            if (state.cells[neighbourId] && !state.cells[neighbourId].active) {
-                state.cells[neighbourId].active = true;
+            if (state.cells[neighbourId] && !state.cells[neighbourId].model) {
                 state.cells[neighbourId].model = action.payload.model;
 
                 sound.play();
@@ -93,8 +91,8 @@ const gridSlice = createSlice({
         },
         subtractBlock: (state, action) => {
             const blockId = action.payload.blockId;
-            if (state.cells[blockId] && state.cells[blockId].active) {
-                state.cells[blockId].active = false;
+            if (state.cells[blockId] && state.cells[blockId].model) {
+                state.cells[blockId].model = null;
             }
         },
         addLayer: (state) => {

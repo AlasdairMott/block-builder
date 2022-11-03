@@ -19,7 +19,7 @@ function addLayer(cellMap: cellMap, dimensions: [number, number, number]): cellM
 
                 let idNext: string;
 
-                if (cell.active) {
+                if (cell.model) {
                     idNext = `${x}-${y + 1}-${z}`;
                 } else if (y === 0) {
                     idNext = `${x}-${y}-${z}`;
@@ -28,7 +28,6 @@ function addLayer(cellMap: cellMap, dimensions: [number, number, number]): cellM
                 }
 
                 if (cellMap[idNext]) {
-                    cellMap[idNext].active = true;
                     cellMap[idNext].model = GetRandomModel();
                 }
 
