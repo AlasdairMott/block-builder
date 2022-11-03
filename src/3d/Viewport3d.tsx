@@ -12,8 +12,17 @@ import { ActiveTool, changeMode, togglePerspective, toggleSound } from '../store
 import RoundButton from "../UI/RoundButton";
 import Toolbar from '../UI/Toolbar';
 import { ICONPROPS } from "../UI/ToolbarButton";
+import { button, Leva, useControls } from 'leva';
 
 const Viewport3d = () => {
+
+    const controls = useControls({
+        addLayer: button(() => { 
+            console.log('addLayer');
+            dispatch(gridActions.addLayer());  
+        }),
+    });
+
     const dispatch = useAppDispatch();
 
     const grid = useAppSelector(state => state.grid.present);
@@ -77,6 +86,7 @@ const Viewport3d = () => {
 
     return (
         <>
+            <Leva hidden={window.location.hash !== '#debug'}/>
             <Canvas shadows={true} onKeyDown={handleKeyPress}>
                 <color attach="background" args={[0.9, 0.9, 0.9]} />
 

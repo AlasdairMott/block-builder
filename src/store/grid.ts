@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Vector3 } from 'three';
+import addLayer from '../functions/addLayer';
 import { Direction } from '../Grid/Cell';
 import { GetRandomModel } from './model';
-import { CellProps } from './types';
-
-type cellMap = { [k: string]: CellProps };
+import { cellMap } from './types';
 
 export function getGridCentroid(cells: cellMap): Vector3 {
     let min: Vector3 = new Vector3(Infinity, Infinity, Infinity);
@@ -34,9 +33,8 @@ export function getGridCentroid(cells: cellMap): Vector3 {
     );
 }
 
-export function createCellMap(): cellMap {
+export function createCellMap(xSize: number, ySize: number, zSize: number): cellMap {
     const cells: cellMap = {};
-    const [xSize, ySize, zSize] = [9, 9, 9];
     
     for (let x = 0; x < xSize; x++) {
         for (let y = 0; y < ySize; y++) {
@@ -71,14 +69,17 @@ export function getNeighbourId(cellId: string, direction: Direction): string {
 
 export const sound = new Audio('/sounds/place.wav');
 
+const size:[number, number, number] = [9,9,9];
+
 const gridSlice = createSlice({
     name: 'grid',
     initialState: {
-        cells: createCellMap(),
-    }, //(initialState as any) as StateWithHistory<typeof initialState>,
+        cells: createCellMap(...size),
+        size: size
+    },
     reducers: {
         newFile: (state) => {
-            state.cells = createCellMap();
+            state.cells = createCellMap(...size);
         },
         addBlock: (state, action) => {
             const neighbourId = getNeighbourId(action.payload.blockId, action.payload.faceId);
@@ -95,7 +96,10 @@ const gridSlice = createSlice({
             if (state.cells[blockId] && state.cells[blockId].active) {
                 state.cells[blockId].active = false;
             }
-        }
+        },
+        addLayer: (state) => {
+            state.cells = addLayer(state.cells, state.size);
+        },
     }
 });
 

@@ -1,3 +1,9 @@
+export type ModelProps = {
+    name: string;
+    rotation: number;
+    color: string;
+}
+
 export type CellProps = {
     blockId: string;
     position: [x: number, y: number, z: number],
@@ -5,10 +11,4 @@ export type CellProps = {
     model: ModelProps | null;
 }
 
-export type ModelProps = {
-    name: string;
-    rotation: number;
-    color: string;
-}
-
-export { };
+export type cellMap = { [k: string]: CellProps };
