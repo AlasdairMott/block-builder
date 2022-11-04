@@ -3,7 +3,7 @@ import { Canvas, Vector3 } from "@react-three/fiber";
 import { SoundHigh, SoundOff } from "iconoir-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActionCreators } from 'redux-undo';
-import { Camera } from "three";
+import { Camera, GridHelper } from "three";
 import { Grid } from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -45,11 +45,11 @@ const Viewport3d = () => {
         }),
         addNoise3d: button(() => {
             console.log('addNoise3d');
-            dispatch(gridActions.addNoise3d({size: noiseSize, threshold: noiseThreshold}));
+            dispatch(gridActions.addNoise3d({ size: noiseSize, threshold: noiseThreshold }));
         }),
         addNoise2d: button(() => {
             console.log('addNoise2d');
-            dispatch(gridActions.addNoise2d({size: noiseSize, threshold: noiseThreshold}));
+            dispatch(gridActions.addNoise2d({ size: noiseSize, threshold: noiseThreshold }));
         }),
         noiseSize: {
             value: noiseSize,

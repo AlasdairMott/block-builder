@@ -40,7 +40,7 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
     };
 
     useFrame(({ clock }) => {
-        hoverPreview.current.position.y = props.position.y*2 + Math.sin(clock.getElapsedTime()*2)*0.08
+        hoverPreview.current.position.y = props.position.y * 2 + Math.sin(clock.getElapsedTime() * 2) * 0.08
     })
 
     // check if the block can be placed - is there an entry in the cells dictionary?
@@ -49,9 +49,9 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
 
     return (
         <>
-            <Plane {...props} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={clickHandler} visible={false}/>
+            <Plane {...props} onPointerEnter={enterHandler} onPointerLeave={leaveHandler} onClick={clickHandler} visible={false} />
             <group position={props.position.clone().multiplyScalar(2)} scale={0.8} ref={hoverPreview}>
-                {hovered && <Model {...model} wireframe={!canPlace}/>}
+                {hovered && <Model {...model} wireframe={!canPlace} />}
             </group>
         </>
     )
