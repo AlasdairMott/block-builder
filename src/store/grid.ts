@@ -36,7 +36,7 @@ export function getGridCentroid(cells: cellMap): Vector3 {
 
 export function createCellMap(xSize: number, ySize: number, zSize: number): cellMap {
     const cells: cellMap = {};
-    
+
     for (let x = 0; x < xSize; x++) {
         for (let y = 0; y < ySize; y++) {
             for (let z = 0; z < zSize; z++) {
@@ -69,7 +69,7 @@ export function getNeighbourId(cellId: string, direction: Direction): string {
 
 export const sound = new Audio('/sounds/place.wav');
 
-const size:[number, number, number] = [9,9,9];
+const size: [number, number, number] = [9, 9, 9];
 
 const gridSlice = createSlice({
     name: 'grid',

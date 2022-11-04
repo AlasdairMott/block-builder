@@ -1,7 +1,6 @@
-import { EmptyPage, Erase, Home, PerspectiveView, Redo, Svg3DSelectSolid, Undo } from "iconoir-react";
+import { Erase, Svg3DSelectSolid } from "iconoir-react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { ActiveTool, changeMode } from "../store/ui";
-import { Command } from "./Toolbar";
 import styles from "./ToolbarButton.module.css";
 
 export const ICONPROPS = {
@@ -28,21 +27,17 @@ const ToolbarToolButton = (props: { mode: ActiveTool; }) => {
 
     return (
         <button className={style} onClick={handleClick} title={ActiveTool[props.mode]}>
-            {props.mode === ActiveTool.Add && <Svg3DSelectSolid {...iconProps} />}
-            {props.mode === ActiveTool.Subtract && <Erase {...iconProps} />}
+            {props.mode === ActiveTool.Add && <Svg3DSelectSolid {...iconProps}/>}
+            {props.mode === ActiveTool.Subtract && <Erase {...iconProps}/>}
         </button>
     );
 }
 
-export const ToolbarCommandButton = (props: { command: Command; onClick: React.MouseEventHandler}) => {
+export const ToolbarCommandButton = (props: { title: string; onClick: React.MouseEventHandler, children: React.ReactNode; }) => {
     const style = `${styles.toolbarButton}`
     return (
-        <button className={style} onClick={props.onClick} title={Command[props.command]}>
-            {props.command === Command.ZoomExtents && <Home {...ICONPROPS}/>}
-            {props.command === Command.TogglePerspective && <PerspectiveView {...ICONPROPS}/>}
-            {props.command === Command.New && <EmptyPage {...ICONPROPS}/>}
-            {props.command === Command.Undo && <Undo {...ICONPROPS}/>}
-            {props.command === Command.Redo && <Redo {...ICONPROPS}/>}
+        <button className={style} onClick={props.onClick} title={props.title}>
+            {props.children}
         </button>
     );
 }
