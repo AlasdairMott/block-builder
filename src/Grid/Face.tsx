@@ -12,13 +12,13 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
     const dispatch = useAppDispatch();
     const model = useAppSelector(state => state.model.model);
 
-    // ref for the floating preview
     const hoverPreview = useRef<Group>(null!);
 
     const [hovered, setHover] = useState(false);
 
     const enterHandler = (e: ThreeEvent<PointerEvent>) => {
         setHover(true);
+        
         e.stopPropagation();
     };
 

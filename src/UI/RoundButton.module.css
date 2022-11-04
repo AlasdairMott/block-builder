@@ -6,14 +6,8 @@
     padding: 12px;
     border-width: 0.1px;
     border-color: transparent;
-
-
-    bottom: 20px;
-    right: 20px;
-    /* padding: 18px; */
-    position: absolute;
-    /* margin: auto; */
     display: flex;
+    margin: 5px;
 }
 
 .roundButton:hover {

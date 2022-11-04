@@ -1,6 +1,6 @@
 import { OrbitControls, OrthographicCamera, PerspectiveCamera, Plane } from "@react-three/drei";
 import { Canvas, Vector3 } from "@react-three/fiber";
-import { SoundHigh, SoundOff } from "iconoir-react";
+import { button, Leva, useControls } from 'leva';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActionCreators } from 'redux-undo';
 import { Camera, GridHelper } from "three";
@@ -8,11 +8,9 @@ import { Grid } from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
-import { ActiveTool, changeMode, togglePerspective, toggleSound } from '../store/ui';
-import RoundButton from "../UI/RoundButton";
+import { ActiveTool, changeMode, togglePerspective } from '../store/ui';
+import { HelpAndSoundButtons, HelpModal } from "../UI/HelpAndSound";
 import Toolbar from '../UI/Toolbar';
-import { ICONPROPS } from "../UI/ToolbarButton";
-import { button, Leva, useControls } from 'leva';
 import Serializer from "../utils/serialization";
 
 const Viewport3d = () => {
@@ -70,12 +68,11 @@ const Viewport3d = () => {
 
     const dispatch = useAppDispatch();
 
-
-    const muted = useAppSelector(state => state.ui.muted);
     const isPerspective = useAppSelector(state => state.ui.perspective);
 
     const [cameraLocation, setCameraLocation] = useState<[number, number, number]>([10, 10, 10]);
     const [cameraTarget, setCameraTarget] = useState<Vector3>(getGridCentroid(grid.cells));
+    const [showHelp, setShowHelp] = useState(false);
 
     const perspectiveCamera = useRef<Camera>(null);
     const orthographicCamera = useRef<Camera>(null);
@@ -153,9 +150,8 @@ const Viewport3d = () => {
                 </Plane>
             </Canvas>
             <Toolbar onZoomExtents={zoomExtents} onTogglePerspective={handleTogglePerspective} onNewFile={handleNewFile}></Toolbar>
-            <RoundButton onClick={() => dispatch(toggleSound())}>
-                {muted ? <SoundOff {...ICONPROPS} /> : <SoundHigh {...ICONPROPS} />}
-            </RoundButton>
+            <HelpAndSoundButtons onShowHelp={() => setShowHelp(!showHelp)}/>
+            {showHelp && <HelpModal onClose={() => setShowHelp(false)}/>}
         </>
     );
 };
