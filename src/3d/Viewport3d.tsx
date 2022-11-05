@@ -11,6 +11,7 @@ import { modelActions } from "../store/model";
 import { ActiveTool, changeMode, togglePerspective } from '../store/ui';
 import { HelpAndSoundButtons, HelpModal } from "../UI/HelpAndSound";
 import Toolbar from '../UI/Toolbar';
+import { compress, decompress } from "../utils/compresser";
 import Serializer from "../utils/serialization";
 
 const Viewport3d = () => {
@@ -27,6 +28,13 @@ const Viewport3d = () => {
             Serializer.readJson().then((json) => {
                 dispatch(gridActions.readFile(json));
             });
+        }),
+        compress: button(() => {
+            Serializer.save(new Blob([JSON.stringify(grid, null, "\t")], { type: "application/json" }), "before.json");
+            const small = compress(grid);
+            Serializer.save(new Blob([JSON.stringify(small, null, "\t")], { type: "application/json" }), "small.json");
+            const large = decompress(small);
+            Serializer.save(new Blob([JSON.stringify(large, null, "\t")], { type: "application/json" }), "after.json");
         }),
     }, [grid]);
 
@@ -124,7 +132,7 @@ const Viewport3d = () => {
         dispatch(togglePerspective());
         setCameraLocation(isPerspective ? perspectiveCamera.current!.position.toArray() : orthographicCamera.current!.position.toArray());
     };
-
+    
     return (
         <>
             <Leva hidden={window.location.hash !== '#debug'} />

@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { clearAllListeners, createSlice } from '@reduxjs/toolkit';
 import { Vector3 } from 'three';
 import { addLayer, subtractLayer } from '../functions/addLayer';
 import { perlinEffector } from '../functions/perlinEffector';
 import { Direction } from '../Grid/Cell';
+import { compress } from '../utils/compresser';
 import { GetRandomModel } from './model';
 import { cellMap } from './types';
 
@@ -90,6 +91,8 @@ const gridSlice = createSlice({
             const neighbourId = getNeighbourId(action.payload.blockId, action.payload.faceId);
 
             if (state.cells[neighbourId] && !state.cells[neighbourId].model) {
+                // window.history.replaceState(null, '', compress({cells: state.cells, size: state.size}));
+
                 state.cells[neighbourId].model = action.payload.model;
 
                 sound.play();
