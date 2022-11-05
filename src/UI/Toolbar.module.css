@@ -4,5 +4,7 @@
     padding: 8px;
     position: absolute;
     margin: auto;
+    margin-right: 20px;
     border-radius: 12px;
+    max-width: 100%;
 }

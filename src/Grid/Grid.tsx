@@ -3,7 +3,7 @@ import { CellProps } from '../store/types';
 import { Cell } from "./Cell";
 import Floor from './Floor';
 
-const Grid = () => {
+export const Grid = () => {
     const grid = useAppSelector(state => state.grid.present);
 
     return (

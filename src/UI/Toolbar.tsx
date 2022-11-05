@@ -34,13 +34,12 @@ const Toolbar: React.FC<{ onZoomExtents: () => void, onNewFile: () => void, onTo
             <div className={`${styles.toolbar} glass`}>
                 <ToolbarToolButton mode={ActiveTool.Add} />
                 <ToolbarToolButton mode={ActiveTool.Subtract} />
-
                 <ToolbarCommandButton onClick={props.onZoomExtents} title={Command[Command.ZoomExtents]}><Home {...ICONPROPS} /></ToolbarCommandButton>
                 <ToolbarCommandButton onClick={props.onTogglePerspective} title={Command[Command.TogglePerspective]} ><PerspectiveView {...ICONPROPS} /></ToolbarCommandButton>
                 <ToolbarCommandButton onClick={props.onNewFile} title={Command[Command.New]}><EmptyPage {...ICONPROPS} /></ToolbarCommandButton>
                 <ToolbarCommandButton onClick={() => dispatch(ActionCreators.undo())} title={Command[Command.Undo]}><Undo {...ICONPROPS} /></ToolbarCommandButton>
                 <ToolbarCommandButton onClick={() => dispatch(ActionCreators.redo())} title={Command[Command.Redo]}><Redo {...ICONPROPS} /></ToolbarCommandButton>
-                <ToolbarCommandButton onClick={handleShare}  title={Command[Command.Share]}><ShareIos {...ICONPROPS} /></ToolbarCommandButton>
+                <ToolbarCommandButton onClick={handleShare} title={Command[Command.Share]}><ShareIos {...ICONPROPS} /></ToolbarCommandButton>
             </div>
         </>
     );
