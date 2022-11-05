@@ -4,7 +4,7 @@ import { ActionCreators } from 'redux-undo';
 import "../App.css";
 import { useAppSelector } from "../store/hooks";
 import { ActiveTool } from "../store/ui";
-import { compress } from "../utils/compresser";
+import { encodeGridState } from "../utils/compresser";
 import styles from "./Toolbar.module.css";
 import ToolbarToolButton, { ICONPROPS, ToolbarCommandButton } from "./ToolbarButton";
 
@@ -24,8 +24,8 @@ const Toolbar: React.FC<{ onZoomExtents: () => void, onNewFile: () => void, onTo
     const grid = useAppSelector(state => state.grid.present);
 
     const handleShare = () => {
-        const compressed = compress(grid);
-        const urlString = window.location.origin + "/" + compressed;
+        const encoded = encodeGridState(grid);
+        const urlString = window.location.origin + "/" + encoded;
         navigator.clipboard.writeText(urlString);
     };
 

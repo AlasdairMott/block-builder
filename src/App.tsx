@@ -3,7 +3,7 @@ import Viewport3d from './3d/Viewport3d';
 import './App.css';
 import { gridActions } from './store/grid';
 import { useAppDispatch } from './store/hooks';
-import { decompress } from './utils/compresser';
+import { decodeGridState } from './utils/compresser';
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
     useEffect(() => {
         const path = window.location.pathname.substring(1);
         if (path) {
-            const json = decompress(path);
+            const json = decodeGridState(path);
             dispatch(gridActions.readFile(json));
             // remove the path from the url
             window.history.replaceState({}, document.title, "/");

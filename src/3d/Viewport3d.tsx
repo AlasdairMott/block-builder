@@ -11,7 +11,7 @@ import { modelActions } from "../store/model";
 import { ActiveTool, changeMode, togglePerspective } from '../store/ui';
 import { HelpAndSoundButtons, HelpModal } from "../UI/HelpAndSound";
 import Toolbar from '../UI/Toolbar';
-import { compress, decompress } from "../utils/compresser";
+import { decodeGridState, encodeGridState } from "../utils/compresser";
 import Serializer from "../utils/serialization";
 
 const Viewport3d = () => {
@@ -31,9 +31,9 @@ const Viewport3d = () => {
         }),
         compress: button(() => {
             Serializer.save(new Blob([JSON.stringify(grid, null, "\t")], { type: "application/json" }), "before.json");
-            const small = compress(grid);
+            const small = encodeGridState(grid);
             Serializer.save(new Blob([JSON.stringify(small, null, "\t")], { type: "application/json" }), "small.json");
-            const large = decompress(small);
+            const large = decodeGridState(small);
             Serializer.save(new Blob([JSON.stringify(large, null, "\t")], { type: "application/json" }), "after.json");
         }),
     }, [grid]);

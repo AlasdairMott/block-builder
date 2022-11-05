@@ -1,5 +1,6 @@
 import { GetRandomColor, MODELS } from '../store/model';
 import { CellProps, gridState, ModelProps } from './../store/types';
+import LZString from 'lz-string';
 
 function encode(model: ModelProps): string {
     const modelIndex = MODELS.indexOf(model.name);
@@ -9,7 +10,7 @@ function encode(model: ModelProps): string {
     return key > 9 ? String.fromCharCode(key + 87) : key.toString();
 }
 
-function compress(gridState: gridState): string {
+function encodeGridState(gridState: gridState): string {
 
     //Loop through each cell
     //1. get index of model.
@@ -32,7 +33,7 @@ function compress(gridState: gridState): string {
         }
     }
 
-    return compressedString;
+    return LZString.compressToEncodedURIComponent(compressedString);
 }
 
 function decode(char: string): ModelProps {
@@ -47,7 +48,9 @@ function decode(char: string): ModelProps {
     };
 }
 
-function decompress(compressedString: string): gridState {
+function decodeGridState(compressedString: string): gridState {
+
+    let uncompressedString = LZString.decompressFromEncodedURIComponent(compressedString);
 
     const gridState: gridState = {
         cells: {},
@@ -66,8 +69,8 @@ function decompress(compressedString: string): gridState {
                     model: null,
                 }
 
-                const char = compressedString.charAt(0);
-                compressedString = compressedString.substr(1);
+                const char = uncompressedString.charAt(0);
+                uncompressedString = uncompressedString.substr(1);
 
                 cell.model = char === "0" ? null : decode(char);
 
@@ -79,4 +82,4 @@ function decompress(compressedString: string): gridState {
     return gridState;
 }
 
-export { compress, decompress };
+export { encodeGridState, decodeGridState };

@@ -18,6 +18,7 @@
     "iconoir": "^5.3.2",
     "iconoir-react": "^5.3.2",
     "leva": "^0.9.34",
+    "lz-string": "^1.4.4",
     "perlin-noise-3d": "^0.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
