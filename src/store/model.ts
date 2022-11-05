@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ModelProps } from "./types";
 
-const MODELS = [
+export const MODELS = [
     "1x1_Arch",
     "1x1_Cylinder",
     "1x1_HalfArch",
@@ -25,9 +25,11 @@ export function GetRandomModel(): ModelProps {
     return {
         name: MODELS[Math.floor(Math.random() * MODELS.length)],
         rotation: Math.PI * 0.5 * Math.floor(Math.random() * 4),
-        color: COLOR[Math.floor(Math.random() * COLOR.length)]
+        color: GetRandomColor(),
     }
 }
+
+export function GetRandomColor(): string { return COLOR[Math.floor(Math.random() * COLOR.length)]; }
 
 const modelSlice = createSlice({
     name: 'model',

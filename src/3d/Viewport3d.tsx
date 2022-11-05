@@ -3,14 +3,20 @@ import { Canvas, Vector3 } from "@react-three/fiber";
 import { button, Leva, useControls } from 'leva';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActionCreators } from 'redux-undo';
+<<<<<<< HEAD
 import { Camera, GridHelper } from "three";
 import { Grid } from '../Grid/Grid';
+=======
+import { Camera } from "three";
+import Grid from '../Grid/Grid';
+>>>>>>> upstream/working
 import { getGridCentroid, gridActions } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
 import { ActiveTool, changeMode, togglePerspective } from '../store/ui';
 import { HelpAndSoundButtons, HelpModal } from "../UI/HelpAndSound";
 import Toolbar from '../UI/Toolbar';
+import { compress, decompress } from "../utils/compresser";
 import Serializer from "../utils/serialization";
 
 const Viewport3d = () => {
@@ -27,6 +33,13 @@ const Viewport3d = () => {
             Serializer.readJson().then((json) => {
                 dispatch(gridActions.readFile(json));
             });
+        }),
+        compress: button(() => {
+            Serializer.save(new Blob([JSON.stringify(grid, null, "\t")], { type: "application/json" }), "before.json");
+            const small = compress(grid);
+            Serializer.save(new Blob([JSON.stringify(small, null, "\t")], { type: "application/json" }), "small.json");
+            const large = decompress(small);
+            Serializer.save(new Blob([JSON.stringify(large, null, "\t")], { type: "application/json" }), "after.json");
         }),
     }, [grid]);
 
@@ -150,8 +163,8 @@ const Viewport3d = () => {
                 </Plane>
             </Canvas>
             <Toolbar onZoomExtents={zoomExtents} onTogglePerspective={handleTogglePerspective} onNewFile={handleNewFile}></Toolbar>
-            <HelpAndSoundButtons onShowHelp={() => setShowHelp(!showHelp)}/>
-            {showHelp && <HelpModal onClose={() => setShowHelp(false)}/>}
+            <HelpAndSoundButtons onShowHelp={() => setShowHelp(!showHelp)} />
+            {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
         </>
     );
 };

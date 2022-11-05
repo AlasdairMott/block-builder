@@ -18,7 +18,6 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
 
     const enterHandler = (e: ThreeEvent<PointerEvent>) => {
         setHover(true);
-        
         e.stopPropagation();
     };
 
