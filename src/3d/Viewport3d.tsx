@@ -4,7 +4,7 @@ import { button, Leva, useControls } from 'leva';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActionCreators } from 'redux-undo';
 import { Camera } from "three";
-import { Grid } from '../Grid/Grid';
+import Grid from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
@@ -144,7 +144,7 @@ const Viewport3d = () => {
                     shadow-camera-top={10}
                     shadow-camera-bottom={-10} intensity={0.8} />
 
-                <Grid />
+                <Grid/>
                 <Plane receiveShadow={true} scale={100} rotation-x={-Math.PI * 0.5} position-y={-0.5}>
                     <shadowMaterial opacity={0.1} />
                 </Plane>

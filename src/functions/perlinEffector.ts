@@ -7,7 +7,7 @@ class perlinEffector {
     addNoise3d(gridState: gridState, scale: number, threshold: number): cellMap {    
         return this.modifyGrid(gridState, (cellMap: cellMap, noise: any, x: number, y: number, z: number) => {
             if (noise.get(x/scale, y/scale, z/scale) > threshold) {
-                const id = `${x}-${y}-${z}`;
+                const id = `${x}_${y}_${z}`;
                 const cell = gridState.cells[id];
                 cell.model = GetRandomModel();
             }
@@ -17,7 +17,7 @@ class perlinEffector {
     addNoise2d(gridState: gridState, scale: number, yScale: number): cellMap {
         return this.modifyGrid(gridState, (cellMap: cellMap, noise: any, x: number, y: number, z: number) => {
             if (noise.get(x/scale, 0, z/scale) > y * yScale) {
-                const id = `${x}-${y}-${z}`;
+                const id = `${x}_${y}_${z}`;
                 const cell = gridState.cells[id];
                 cell.model = GetRandomModel();
             }

@@ -1,8 +1,9 @@
 import { useAppSelector } from '../store/hooks';
 import { CellProps } from '../store/types';
 import { Cell } from "./Cell";
+import Floor from './Floor';
 
-export function Grid() {
+const Grid = () => {
     const grid = useAppSelector(state => state.grid.present);
 
     return (
@@ -15,6 +16,9 @@ export function Grid() {
                     />
                 ) : null;;
             })}
+            <Floor size={grid.size} />
         </>
     );
 }
+
+export default Grid;

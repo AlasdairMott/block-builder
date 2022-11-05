@@ -40,7 +40,7 @@ export function createCellMap(xSize: number, ySize: number, zSize: number): cell
     for (let x = 0; x < xSize; x++) {
         for (let y = 0; y < ySize; y++) {
             for (let z = 0; z < zSize; z++) {
-                const id = `${x}-${y}-${z}`;
+                const id = `${x}_${y}_${z}`;
                 const position: [x: number, y: number, z: number] = [x, y, z];
                 const active = (x === Math.floor(xSize / 2) && y === 0 && z === Math.floor(zSize / 2));
                 cells[id] = {
@@ -56,14 +56,14 @@ export function createCellMap(xSize: number, ySize: number, zSize: number): cell
 }
 
 export function getNeighbourId(cellId: string, direction: Direction): string {
-    const [x, y, z] = cellId.split('-').map(x => parseInt(x));
+    const [x, y, z] = cellId.split('_').map(x => parseInt(x));
     switch (direction) {
-        case Direction.xPos: return `${x + 1}-${y}-${z}`;
-        case Direction.xNeg: return `${x - 1}-${y}-${z}`;
-        case Direction.yPos: return `${x}-${y + 1}-${z}`;
-        case Direction.yNeg: return `${x}-${y - 1}-${z}`;
-        case Direction.zPos: return `${x}-${y}-${z + 1}`;
-        case Direction.zNeg: return `${x}-${y}-${z - 1}`;
+        case Direction.xPos: return `${x + 1}_${y}_${z}`;
+        case Direction.xNeg: return `${x - 1}_${y}_${z}`;
+        case Direction.yPos: return `${x}_${y + 1}_${z}`;
+        case Direction.yNeg: return `${x}_${y - 1}_${z}`;
+        case Direction.zPos: return `${x}_${y}_${z + 1}`;
+        case Direction.zNeg: return `${x}_${y}_${z - 1}`;
     }
 }
 

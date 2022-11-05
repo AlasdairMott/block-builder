@@ -9,15 +9,15 @@ import { cellMap, gridState } from './../store/types';
 function addLayer(gridState: gridState): cellMap {
 
     return modifyCellMap(gridState, (cellMap: cellMap, x: number, y: number, z: number): boolean => {
-        const id = `${x}-${y}-${z}`;
+        const id = `${x}_${y}_${z}`;
         const cell = gridState.cells[id];
 
         let idNext: string;
 
         if (cell.model) {
-            idNext = `${x}-${y + 1}-${z}`;
+            idNext = `${x}_${y + 1}_${z}`;
         } else if (y === 0) {
-            idNext = `${x}-${y}-${z}`;
+            idNext = `${x}_${y}_${z}`;
         } else {
             return false;
         }
@@ -37,7 +37,7 @@ function addLayer(gridState: gridState): cellMap {
  */
 function subtractLayer(gridState: gridState): cellMap {
     return modifyCellMap(gridState, (cellMap: cellMap, x: number, y: number, z: number): boolean => {
-        const id = `${x}-${y}-${z}`;
+        const id = `${x}_${y}_${z}`;
         const cell = gridState.cells[id];
 
         if (cell.model) {
