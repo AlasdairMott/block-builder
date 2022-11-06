@@ -4,7 +4,7 @@ import { ActiveTool } from '../store/ui';
 import { Cell } from "./Cell";
 import Floor from './Floor';
 
-const Grid = () => {
+export const Grid = () => {
     const grid = useAppSelector(state => state.grid.present);
     const mode = useAppSelector(state => state.ui.mode);
 

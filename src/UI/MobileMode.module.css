@@ -1,0 +1,40 @@
+.mobileModeButton {
+    bottom: 15px;
+    left: 15px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.mobileSelector {
+    bottom: 15px;
+    left: 15px;
+    margin: 0 auto;
+    margin-bottom: 4em;
+    position: absolute;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.canvasContainer {
+    width: 3.5em;
+    height: 3.5em;
+    margin-bottom: 5px;
+}
+
+.canvasContainer canvas {
+    border-radius: 12px;
+}
+
+.previewButtons {
+    padding: 3px;
+    border-radius: 12px;
+    margin-left: 2.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

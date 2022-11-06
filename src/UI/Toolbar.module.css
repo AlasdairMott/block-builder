@@ -1,8 +1,10 @@
 .toolbar {
-    top: 20px;
-    left: 20px;
-    padding: 8px;
+    top: 15px;
+    left: 15px;
+    padding: 5px;
     position: absolute;
     margin: auto;
+    margin-right: 15px;
     border-radius: 12px;
+    max-width: 100%;
 }

@@ -10,8 +10,8 @@ const Preview = () => {
     return (
         <div className={`${styles.preview} glass`}>
             <Canvas camera={{ position: [1, 1, 1] }} shadows={true}>
-                <ambientLight intensity={1.0}/>
-                <Model {...nextModel}/>
+                <ambientLight intensity={1.0} />
+                <Model {...nextModel} />
             </Canvas>
         </div>
     )
