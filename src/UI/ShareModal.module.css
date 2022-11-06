@@ -1,0 +1,102 @@
+.shareModal {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    min-height: 15%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.modalBody {
+    background-color: #ffffff;
+    margin: 0 auto;
+    display: flex;
+    min-width: 50%;
+    height: 90%;
+    border-radius: 12px;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.copiedClipboard {
+    display: flex;
+    width: 95%;
+    height: 3.5em;
+    vertical-align: middle;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25em;
+}
+
+.closeShareModal {
+    cursor: pointer;
+    right: 0;
+}
+
+.buttonsContainer {
+    width: 95%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.shareModalButton {
+    height: 100%;
+    border-radius: 6px;
+    border-style: inset;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+    border-width: 0.1px;
+    border-color: transparent;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shareContainer {
+    display: block;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.iconBox {
+    width: 5em;
+}
+
+.iconNameBox {
+    color: black;
+    font-weight: 400;
+}
+
+@media all and (max-width: 480px) {
+    .shareModal {
+        position: absolute;
+        bottom: 0;
+        top: auto;
+        z-index: 1;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+
+    }
+
+    .modalBody {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin: 0 10px;
+        height: 100%;
+    }
+
+    .buttonsContainer {
+        flex-wrap: wrap;
+    }
+
+    .copiedClipboard {
+        height: 7em;
+        width: 100%;
+    }
+}

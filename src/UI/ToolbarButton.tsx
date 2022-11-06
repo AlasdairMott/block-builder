@@ -27,8 +27,8 @@ const ToolbarToolButton = (props: { mode: ActiveTool; }) => {
 
     return (
         <button className={style} onClick={handleClick} title={ActiveTool[props.mode]}>
-            {props.mode === ActiveTool.Add && <Svg3DSelectSolid {...iconProps}/>}
-            {props.mode === ActiveTool.Subtract && <Erase {...iconProps}/>}
+            {props.mode === ActiveTool.Add && <Svg3DSelectSolid {...iconProps} />}
+            {props.mode === ActiveTool.Subtract && <Erase {...iconProps} />}
         </button>
     );
 }
