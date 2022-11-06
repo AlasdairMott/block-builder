@@ -1,15 +1,13 @@
-import styles from "./MobileMode.module.css";
-import "../App.css";
-import Preview from "../3d/Preview";
-import Model from "../Grid/Model";
-import { Canvas, Vector3 } from "@react-three/fiber";
-import { OrbitControls, OrthographicCamera, PerspectiveCamera, Plane } from "@react-three/drei";
-import { AddHexagon, RefreshDouble, Palette, SmartphoneDevice, Cancel, Camera } from "iconoir-react";
-import ToolbarToolButton, { ICONPROPS, ToolbarCommandButton } from "./ToolbarButton";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { Canvas } from "@react-three/fiber";
+import { AddHexagon, Palette, RefreshDouble, SmartphoneDevice } from "iconoir-react";
 import { useDispatch } from "react-redux";
+import "../App.css";
+import Model from "../Grid/Model";
+import { useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
+import styles from "./MobileMode.module.css";
 import RoundButton from "./RoundButton";
+import { ICONPROPS, ToolbarCommandButton } from "./ToolbarButton";
 
 const MobileButton = (props: { onActivate: () => void }) => {
 
