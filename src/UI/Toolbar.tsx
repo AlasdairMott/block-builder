@@ -24,13 +24,6 @@ type undoRedoProps = { canUndo?: boolean, canRedo?: boolean, onUndo?: boolean, o
 const Toolbar: React.FC<{ onZoomExtents: () => void, onNewFile: () => void, onTogglePerspective: () => void } & undoRedoProps> = (props) => {
     const dispatch = useDispatch();
     const grid = useAppSelector(state => state.grid.present);
-
-    /* const handleShare = () => {
-        const encoded = encodeGridState(grid);
-        const urlString = window.location.origin + "/" + encoded;
-        navigator.clipboard.writeText(urlString);
-    }; */
-
     const [showShare, setShowShare] = useState(false);
 
     return (

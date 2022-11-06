@@ -1,16 +1,15 @@
-import { OrbitControls, OrthographicCamera, PerspectiveCamera, Plane } from "@react-three/drei";
+import { OrbitControls, OrbitControlsProps, OrthographicCamera, PerspectiveCamera, Plane } from "@react-three/drei";
 import { Canvas, Vector3 } from "@react-three/fiber";
 import { button, Leva, useControls } from 'leva';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActionCreators } from 'redux-undo';
-import { Camera } from "three";
+import { Camera, GridHelper } from "three";
 import { Grid } from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
 import { ActiveTool, changeMode, togglePerspective } from '../store/ui';
 import { HelpAndSoundButtons, HelpModal } from "../UI/HelpAndSound";
-import { MobileButton, MobileSelector } from "../UI/MobileMode";
 import Toolbar from '../UI/Toolbar';
 import { decodeGridState, encodeGridState } from "../utils/compresser";
 import Serializer from "../utils/serialization";
@@ -78,12 +77,10 @@ const Viewport3d = () => {
     const dispatch = useAppDispatch();
 
     const isPerspective = useAppSelector(state => state.ui.perspective);
-
     const [cameraLocation, setCameraLocation] = useState<[number, number, number]>([10, 10, 10]);
     const [cameraTarget, setCameraTarget] = useState<Vector3>(getGridCentroid(grid.cells));
 
     const [showHelp, setShowHelp] = useState(false);
-    const [mobileMode, setMobileMode] = useState(false);
 
     const perspectiveCamera = useRef<Camera>(null);
     const orthographicCamera = useRef<Camera>(null);
@@ -160,11 +157,8 @@ const Viewport3d = () => {
                 </Plane>
             </Canvas>
             <Toolbar onZoomExtents={zoomExtents} onTogglePerspective={handleTogglePerspective} onNewFile={handleNewFile}></Toolbar>
-            <MobileButton onActivate={() => setMobileMode(!mobileMode)} />
-            {mobileMode && <MobileSelector cam={cameraTarget} onClose={() => setMobileMode(false)} />}
             <HelpAndSoundButtons onShowHelp={() => setShowHelp(!showHelp)} />
             {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
-
         </>
     );
 };
