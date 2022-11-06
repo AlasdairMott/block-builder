@@ -42,9 +42,14 @@ const modelSlice = createSlice({
         },
         rotateBlock: (state, action) => {
             switch (action.payload) {
-                case 'left': state.model.rotation -= Math.PI * 0.5; break;
-                case 'right': state.model.rotation += Math.PI * 0.5; break;
+                case 'left':
+                    state.model.rotation -= Math.PI * 0.5;
+                    break;
+                case 'right':
+                    state.model.rotation += Math.PI * 0.5;
+                    break;
             }
+            state.model.rotation %= Math.PI * 2;
         },
         nextBlock: (state) => {
             state.model.name = MODELS[(MODELS.indexOf(state.model.name) + 1) % MODELS.length];

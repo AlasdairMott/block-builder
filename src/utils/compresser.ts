@@ -5,9 +5,9 @@ import LZString from 'lz-string';
 function encode(model: ModelProps): string {
     const modelIndex = MODELS.indexOf(model.name);
     const rotationIndex = Math.round(model.rotation / (Math.PI * 0.5));
-    const key = (modelIndex + 1) * 4 + rotationIndex;
+    const key = (modelIndex) * 4 + rotationIndex + 1;
     
-    return key > 9 ? String.fromCharCode(key + 87) : key.toString();
+    return key > 9 ? String.fromCharCode(key + 56) : key.toString();
 }
 
 function encodeGridState(gridState: gridState): string {
@@ -37,8 +37,9 @@ function encodeGridState(gridState: gridState): string {
 }
 
 function decode(char: string): ModelProps {
-    const key = char.charCodeAt(0) > 96 ? char.charCodeAt(0) - 87 : parseInt(char);
-    const modelIndex = Math.floor(key / 4) - 1;
+    let key = char.charCodeAt(0) > 65 ? char.charCodeAt(0) - 56 : parseInt(char);
+    key--;
+    const modelIndex = Math.floor(key / 4);
     const rotationIndex = key % 4;
 
     return {
