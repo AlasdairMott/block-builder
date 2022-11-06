@@ -2,33 +2,34 @@
     bottom: 15px;
     left: 15px;
     position: absolute;
-    display: inline-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
 }
 
 .mobileSelector {
-    bottom: 0;
-    left: 0;
+    bottom: 15px;
+    left: 15px;
     margin: 0 auto;
-    margin-bottom: 10px;
-    margin-left: 10px;
+    margin-bottom: 4em;
     position: absolute;
     display: inline-flex;
-    max-width: 65%;
-    width: fit-content;
-    height: fit-content;
-    max-height: 25%;
-
+    flex-direction: column;
 }
 
 .canvasContainer {
-    max-width: 70%;
+    width: 3.5em;
+    height: 3.5em;
+    margin-bottom: 5px;
 }
 
 .canvasContainer canvas {
     border-radius: 12px;
 }
 
-.previwButtons {
+.previewButtons {
     padding: 3px;
     border-radius: 12px;
     margin-left: 2.5px;
@@ -36,8 +37,4 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-
-.close {
-    height: fit-content;
 }

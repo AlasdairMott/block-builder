@@ -160,10 +160,10 @@ const Viewport3d = () => {
                 </Plane>
             </Canvas>
             <Toolbar onZoomExtents={zoomExtents} onTogglePerspective={handleTogglePerspective} onNewFile={handleNewFile}></Toolbar>
-            <HelpAndSoundButtons onShowHelp={() => setShowHelp(!showHelp)} />
-            {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
             <MobileButton onActivate={() => setMobileMode(!mobileMode)} />
             {mobileMode && <MobileSelector cam={cameraTarget} onClose={() => setMobileMode(false)} />}
+            <HelpAndSoundButtons onShowHelp={() => setShowHelp(!showHelp)} />
+            {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
 
         </>
     );

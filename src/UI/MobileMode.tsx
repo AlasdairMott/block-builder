@@ -1,10 +1,10 @@
-import styles from "./MobileSelector.module.css";
+import styles from "./MobileMode.module.css";
 import "../App.css";
 import Preview from "../3d/Preview";
 import Model from "../Grid/Model";
 import { Canvas, Vector3 } from "@react-three/fiber";
 import { OrbitControls, OrthographicCamera, PerspectiveCamera, Plane } from "@react-three/drei";
-import { AddHexagon, CropRotateTr, Palette, SmartphoneDevice, Cancel, Camera } from "iconoir-react";
+import { AddHexagon, RefreshDouble, Palette, SmartphoneDevice, Cancel, Camera } from "iconoir-react";
 import ToolbarToolButton, { ICONPROPS, ToolbarCommandButton } from "./ToolbarButton";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { useDispatch } from "react-redux";
@@ -29,21 +29,18 @@ const MobileSelector = (props: { onClose: () => void, cam: any }) => {
         <div className={styles.mobileSelector}>
             <div className={styles.canvasContainer}>
                 <Canvas shadows={true} camera={{ position: [1, 1, 1] }}>
-                    <color attach="background" args={[1, 1, 1]} />
-                    <OrbitControls />
                     <ambientLight intensity={1.0} />
                     <Model {...nextModel} />
                 </Canvas>
             </div>
-            <div className={`${styles.previwButtons} glass`}>
-                <ToolbarCommandButton onClick={() => { console.log(props.cam); dispatch(modelActions.nextBlock()) }} title={"next-shape"}><AddHexagon {...ICONPROPS} />
+            <div className={`${styles.previewButtons} glass`}>
+                <ToolbarCommandButton onClick={() => { dispatch(modelActions.nextBlock()) }} title={"next-shape"}><AddHexagon {...ICONPROPS} />
                 </ToolbarCommandButton>
-                <ToolbarCommandButton onClick={() => { dispatch(modelActions.rotateBlock('right')) }} title={"change-color"}><CropRotateTr {...ICONPROPS} />
+                <ToolbarCommandButton onClick={() => { dispatch(modelActions.rotateBlock('right')) }} title={"change-color"}><RefreshDouble {...ICONPROPS} />
                 </ToolbarCommandButton>
                 <ToolbarCommandButton onClick={() => { dispatch(modelActions.nextColor()) }} title={"rotate"}><Palette {...ICONPROPS} />
                 </ToolbarCommandButton>
             </div>
-            <div className={styles.close} onClick={props.onClose}><Cancel /></div>
         </div>
     );
 };
