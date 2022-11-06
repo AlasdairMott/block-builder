@@ -50,6 +50,7 @@ const modelSlice = createSlice({
                     break;
             }
             state.model.rotation %= Math.PI * 2;
+            if (state.model.rotation < 0) state.model.rotation += Math.PI * 2;
         },
         nextBlock: (state) => {
             state.model.name = MODELS[(MODELS.indexOf(state.model.name) + 1) % MODELS.length];

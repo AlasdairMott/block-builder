@@ -5,6 +5,12 @@ import LZString from 'lz-string';
 function encode(model: ModelProps): string {
     const modelIndex = MODELS.indexOf(model.name);
     const rotationIndex = Math.round(model.rotation / (Math.PI * 0.5));
+
+    if (rotationIndex < 0 || rotationIndex > 3) {
+        console.log('rotation', model.rotation)
+        throw new Error(`Rotation index is not valid: ${rotationIndex}`);
+    }
+
     const key = (modelIndex) * 4 + rotationIndex + 1;
     
     return key > 9 ? String.fromCharCode(key + 56) : key.toString();
