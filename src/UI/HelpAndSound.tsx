@@ -41,7 +41,7 @@ const HelpModal = (props: { onClose: () => void }) => {
     }, [handleKeyPress]);
 
     return (
-        <div className={styles.helpModal} onClick={props.onClose}>
+        <div className={styles.helpModal} >
             <div className={styles.helpModal__content}>
                 <table>
                     <tbody>
@@ -83,6 +83,7 @@ const HelpModal = (props: { onClose: () => void }) => {
                     <Cancel {...ICONPROPS} />
                 </button>
             </div>
+            <div className={styles.closeHelpModalArea} onClick={props.onClose}></div>
         </div>
     );
 }

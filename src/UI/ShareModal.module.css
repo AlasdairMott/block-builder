@@ -12,7 +12,7 @@
     z-index: 1;
 }
 
-.closeModalArea {
+.closeShareModalArea {
     position: absolute;
     top: 0;
     left: 0;
@@ -27,7 +27,7 @@
     display: flex;
     width: fit-content;
     height: 9.5em;
-    max-width: 85%;
+    max-width: 80%;
     border-radius: 12px;
     flex-direction: row;
     padding: 15px;
@@ -70,6 +70,7 @@
 .clipboardBox {
     display: flex;
     width: 100%;
+    align-items: center;
 }
 
 .url {
@@ -91,6 +92,7 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+    font-size: 20px;
 }
 
 .buttonsContainer {
@@ -137,7 +139,7 @@
 
 .iconNameBox {
     color: black;
-    font-weight: 500;
+    font-weight: bold;
     font-size: clamp(0.25em, 3vw, 0.9em);
     text-align: center;
     vertical-align: middle;

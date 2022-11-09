@@ -74,7 +74,7 @@ const ShareModal = (props: { onClose: () => void }) => {
                     </div>
                 }
             </div>
-            <div className={styles.closeModalArea} onClick={props.onClose}></div>
+            <div className={styles.closeShareModalArea} onClick={props.onClose}></div>
         </div >
     );
 }
