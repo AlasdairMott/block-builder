@@ -8,8 +8,7 @@ import { encodeGridState } from "../utils/compresser";
 import { wait } from "@testing-library/user-event/dist/utils";
 
 export const SHAREICONPROPS = {
-    width: "50%",
-    height: "50%",
+    width: "100%",
     strokeWidth: "1.5px",
     color: "black"
 }
@@ -17,12 +16,10 @@ export const SHAREICONPROPS = {
 const ShareModal = (props: { onClose: () => void }) => {
     const grid = useAppSelector(state => state.grid.present);
     const [copiedClipboard, setCopiedClipboard] = useState(false)
+    const encoded = encodeGridState(grid);
+    const urlString = window.location.origin + "/" + encoded;
 
     const handleShare = (shareType: string) => {
-        const encoded = encodeGridState(grid);
-        const urlString = window.location.origin + "/" + encoded;
-
-        console.log(shareType)
         switch (shareType) {
             case "Clipboard":
                 navigator.clipboard.writeText(urlString);
@@ -57,21 +54,27 @@ const ShareModal = (props: { onClose: () => void }) => {
     }
     //no whatsapp icon in iconoir
     return (
-        <div className={styles.shareModal} >
-            <div className={styles.modalBody}>
+        <div className={styles.modalContainer}>
+            <div className={styles.shareModal}>
                 {copiedClipboard
-                    ? <div className={styles.copiedClipboard}><CheckCircledOutline color="green" strokeWidth="1px" /> Copied to the clipboard</div>
-                    : <div className={styles.buttonsContainer}>
-                        <div> <ShareModalButton onClick={() => handleShare("Clipboard")} title={"Copy link"}> <Copy {...SHAREICONPROPS} /></ShareModalButton></div>
-                        <div><ShareModalButton onClick={() => handleShare("WhatsApp")} title={"WhatsApp"}> <MessageText {...SHAREICONPROPS} /> </ShareModalButton></div>
-                        <div><ShareModalButton onClick={() => handleShare("Telegram")} title={"Telegram"}> <Telegram {...SHAREICONPROPS} /> </ShareModalButton></div>
-                        <div><ShareModalButton onClick={() => handleShare("Twitter")} title={"Twitter"}> <Twitter {...SHAREICONPROPS} /> </ShareModalButton></div>
-                        <div><ShareModalButton onClick={() => handleShare("Gmail")} title={"Gmail"} > <Mail {...SHAREICONPROPS} /> </ShareModalButton></div>
-                        <div><ShareModalButton onClick={() => handleShare("Pinterest")} title={"Pinterest"}> <Pinterest {...SHAREICONPROPS} /> </ShareModalButton></div>
+                    ? <div className={styles.copiedClipboard}><CheckCircledOutline /> Copied to the clipboard</div>
+                    : <div className={styles.modalBody}>
+                        <div className={styles.buttonsContainer}>
+                            <div className={styles.buttonsBox}><ShareModalButton onClick={() => handleShare("WhatsApp")} title={"WhatsApp"}> <MessageText {...SHAREICONPROPS} /> </ShareModalButton></div>
+                            <div className={styles.buttonsBox}><ShareModalButton onClick={() => handleShare("Telegram")} title={"Telegram"}> <Telegram {...SHAREICONPROPS} /> </ShareModalButton></div>
+                            <div className={styles.buttonsBox}><ShareModalButton onClick={() => handleShare("Twitter")} title={"Twitter"}> <Twitter {...SHAREICONPROPS} /> </ShareModalButton></div>
+                            <div className={styles.buttonsBox}><ShareModalButton onClick={() => handleShare("Gmail")} title={"Gmail"} > <Mail {...SHAREICONPROPS} /> </ShareModalButton></div>
+                            <div className={styles.buttonsBox}><ShareModalButton onClick={() => handleShare("Pinterest")} title={"Pinterest"}> <Pinterest {...SHAREICONPROPS} /> </ShareModalButton></div>
+                        </div>
+                        <div className={styles.clipboardBox}>
+                            <input type="text" value={urlString} className={styles.url} />
+                            <div className={styles.buttonsBox}><ShareModalButton onClick={() => handleShare("Clipboard")} title={""}> <Copy {...SHAREICONPROPS} /></ShareModalButton></div>
+                        </div>
+                        <div className={styles.closeShareModal} onClick={props.onClose} title={""}> <Cancel color="black" strokeWidth="2px" /> </div>
                     </div>
                 }
-                <div className={styles.closeShareModal} onClick={props.onClose} title={""}> <Cancel color="black" strokeWidth="2px" /> </div>
             </div>
+            <div className={styles.closeModalArea} onClick={props.onClose}></div>
         </div >
     );
 }
@@ -87,7 +90,6 @@ export const ShareModalButton = (props: { title: string; onClick: React.MouseEve
                     {props.title}
                 </div>
             </div>
-
         </button>
     );
 }

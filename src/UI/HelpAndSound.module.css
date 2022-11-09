@@ -24,14 +24,15 @@
     padding: 10px;
     justify-content: center;
     overflow: auto;
-    
+
 }
 
 table {
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 
-th, td {
+th,
+td {
     padding-top: 2px;
     padding-bottom: 2px;
     padding-left: 17px;
