@@ -53,7 +53,7 @@ const MobileSelector = (props: { onClose: () => void, cam: any }) => {
                             dispatch(gridActions.addBlock({ faceId: previewBlockIds.faceId, blockId: previewBlockIds.blockId, model: nextModel }));
                             setTimeout(function () {
                                 dispatch(modelActions.randomBlock());
-                            }, 20);
+                            }, 100);
                         }} title={""}>
                             <Check />
                         </div>
