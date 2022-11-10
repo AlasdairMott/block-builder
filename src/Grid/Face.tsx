@@ -15,6 +15,8 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
     const model = useAppSelector(state => state.model.model);
     const mobileModeActive = useAppSelector(state => state.ui.mobileMode);
     const placedPreview = useAppSelector(state => state.ui.placedPreview);
+    const previewBlockIds = useAppSelector(state => state.ui.previewBlockIds);
+
 
     const hoverPreview = useRef<Group>(null!);
 
@@ -42,14 +44,22 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
             e.stopPropagation();
         }
         else {
-            setHover(true)
+            if (placedPreview) {
+                setHover(false)
+                if (props.faceId === previewBlockIds.faceId && props.blockId === previewBlockIds.blockId) {
+                    setHover(true)
+                }
+            }
+            else {
+                setHover(true)
+                dispatch(togglePlacedPreview())
+                dispatch(setCurrentPreviewIds({
+                    faceId: props.faceId,
+                    blockId: props.blockId,
+                    model: model
+                }))
+            }
             e.stopPropagation();
-            dispatch(togglePlacedPreview())
-            dispatch(setCurrentPreviewIds({
-                faceId: props.faceId,
-                blockId: props.blockId,
-                model: model
-            }))
         }
     };
 
@@ -75,7 +85,7 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
             }
             <group position={props.position.clone().multiplyScalar(2)} scale={0.8} ref={hoverPreview}>
                 {hovered && <Model {...model} wireframe={!canPlace} />}
-                {hovered && mobileModeActive && <Model {...model} wireframe={!canPlace} />}
+                {hovered && mobileModeActive && placedPreview && <Model {...model} wireframe={!canPlace} />}
             </group>
 
         </>
