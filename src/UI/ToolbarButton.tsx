@@ -1,7 +1,8 @@
 import { Erase, Svg3DSelectSolid } from "iconoir-react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { ActiveTool, changeMode } from "../store/ui";
+import { ActiveTool, changeMode, togglePlacedPreview } from "../store/ui";
 import styles from "./ToolbarButton.module.css";
+
 
 export const ICONPROPS = {
     strokeWidth: "2px",
@@ -11,11 +12,13 @@ export const ICONPROPS = {
 const ToolbarToolButton = (props: { mode: ActiveTool; }) => {
     const dispatch = useAppDispatch();
     const mode = useAppSelector(state => state.ui.mode);
+    const placedPreview = useAppSelector(state => state.ui.placedPreview);
 
     const active = mode === props.mode;
 
     const handleClick = () => {
         dispatch(changeMode({ mode: props.mode }));
+        if (placedPreview) { dispatch(togglePlacedPreview()) };
     }
 
     const iconProps = {

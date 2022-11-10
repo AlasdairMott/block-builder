@@ -8,7 +8,7 @@ import { Grid } from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
-import { ActiveTool, changeMode, togglePerspective, toggleMobileMode } from '../store/ui';
+import { ActiveTool, changeMode, togglePerspective, toggleMobileMode, togglePlacedPreview } from '../store/ui';
 import { HelpAndSoundButtons, HelpModal } from "../UI/HelpAndSound";
 import Toolbar from '../UI/Toolbar';
 import { MobileSelector, MobileButton } from "../UI/MobileMode";
@@ -18,6 +18,7 @@ import Serializer from "../utils/serialization";
 const Viewport3d = () => {
 
     const grid = useAppSelector(state => state.grid.present);
+    const placedPreview = useAppSelector(state => state.ui.placedPreview);
 
     useControls("IO", {
         saveJson: button(() => {
@@ -128,6 +129,7 @@ const Viewport3d = () => {
 
     const handleNewFile = () => {
         dispatch(gridActions.newFile());
+        if (placedPreview) { dispatch(togglePlacedPreview()) };
     };
 
     const handleTogglePerspective = () => {

@@ -4,7 +4,7 @@ import { ActionCreators } from 'redux-undo';
 import { useState } from "react";
 import "../App.css";
 import { useAppSelector } from "../store/hooks";
-import { ActiveTool } from "../store/ui";
+import { ActiveTool, togglePlacedPreview } from "../store/ui";
 import { encodeGridState } from "../utils/compresser";
 import styles from "./Toolbar.module.css";
 import ToolbarToolButton, { ICONPROPS, ToolbarCommandButton } from "./ToolbarButton";
@@ -24,6 +24,7 @@ type undoRedoProps = { canUndo?: boolean, canRedo?: boolean, onUndo?: boolean, o
 const Toolbar: React.FC<{ onZoomExtents: () => void, onNewFile: () => void, onTogglePerspective: () => void } & undoRedoProps> = (props) => {
     const dispatch = useDispatch();
     const grid = useAppSelector(state => state.grid.present);
+    const placedPreview = useAppSelector(state => state.ui.placedPreview);
     const [showShare, setShowShare] = useState(false);
 
     return (
@@ -34,9 +35,9 @@ const Toolbar: React.FC<{ onZoomExtents: () => void, onNewFile: () => void, onTo
                 <ToolbarCommandButton onClick={props.onZoomExtents} title={Command[Command.ZoomExtents]}><Home {...ICONPROPS} /></ToolbarCommandButton>
                 <ToolbarCommandButton onClick={props.onTogglePerspective} title={Command[Command.TogglePerspective]} ><PerspectiveView {...ICONPROPS} /></ToolbarCommandButton>
                 <ToolbarCommandButton onClick={props.onNewFile} title={Command[Command.New]}><EmptyPage {...ICONPROPS} /></ToolbarCommandButton>
-                <ToolbarCommandButton onClick={() => dispatch(ActionCreators.undo())} title={Command[Command.Undo]}><Undo {...ICONPROPS} /></ToolbarCommandButton>
-                <ToolbarCommandButton onClick={() => dispatch(ActionCreators.redo())} title={Command[Command.Redo]}><Redo {...ICONPROPS} /></ToolbarCommandButton>
-                <ToolbarCommandButton onClick={() => setShowShare(!showShare)} title={Command[Command.Share]}><ShareIos {...ICONPROPS} /></ToolbarCommandButton>
+                <ToolbarCommandButton onClick={() => { placedPreview ? dispatch(togglePlacedPreview()) : dispatch(ActionCreators.undo()); }} title={Command[Command.Undo]}><Undo {...ICONPROPS} /></ToolbarCommandButton>
+                <ToolbarCommandButton onClick={() => { placedPreview ? dispatch(togglePlacedPreview()) : dispatch(ActionCreators.redo()); }} title={Command[Command.Redo]}><Redo {...ICONPROPS} /></ToolbarCommandButton>
+                <ToolbarCommandButton onClick={() => { setShowShare(!showShare); if (placedPreview) { dispatch(togglePlacedPreview()) }; }} title={Command[Command.Share]}><ShareIos {...ICONPROPS} /></ToolbarCommandButton>
             </div>
             {showShare ? <ShareModal onClose={() => setShowShare(!showShare)} /> : null}
         </div>
