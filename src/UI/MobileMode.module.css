@@ -38,3 +38,43 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.confirmPreview {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    left: 60px;
+    animation-name: scale;
+    animation-duration: .5s;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.confirmPreview div {
+    line-height: 50%;
+    border-radius: 50%;
+    background-color: black;
+    padding: 5px;
+    color: white;
+    margin-bottom: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.confirmPreview div svg {
+    width: 1.25em;
+    height: 1.25em;
+    stroke-width: 0.15em;
+    color: white;
+}

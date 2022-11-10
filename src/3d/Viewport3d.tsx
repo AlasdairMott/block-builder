@@ -1,16 +1,17 @@
-import { OrbitControls, OrbitControlsProps, OrthographicCamera, PerspectiveCamera, Plane } from "@react-three/drei";
+import { OrbitControls, OrthographicCamera, PerspectiveCamera, Plane } from "@react-three/drei";
 import { Canvas, Vector3 } from "@react-three/fiber";
 import { button, Leva, useControls } from 'leva';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActionCreators } from 'redux-undo';
-import { Camera, GridHelper } from "three";
+import { Camera } from "three";
 import { Grid } from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
-import { ActiveTool, changeMode, togglePerspective } from '../store/ui';
+import { ActiveTool, changeMode, togglePerspective, toggleMobileMode } from '../store/ui';
 import { HelpAndSoundButtons, HelpModal } from "../UI/HelpAndSound";
 import Toolbar from '../UI/Toolbar';
+import { MobileSelector, MobileButton } from "../UI/MobileMode";
 import { decodeGridState, encodeGridState } from "../utils/compresser";
 import Serializer from "../utils/serialization";
 
@@ -81,6 +82,7 @@ const Viewport3d = () => {
     const [cameraTarget, setCameraTarget] = useState<Vector3>(getGridCentroid(grid.cells));
 
     const [showHelp, setShowHelp] = useState(false);
+    const mobileModeActive = useAppSelector(state => state.ui.mobileMode);
 
     const perspectiveCamera = useRef<Camera>(null);
     const orthographicCamera = useRef<Camera>(null);
@@ -157,6 +159,8 @@ const Viewport3d = () => {
                 </Plane>
             </Canvas>
             <Toolbar onZoomExtents={zoomExtents} onTogglePerspective={handleTogglePerspective} onNewFile={handleNewFile}></Toolbar>
+            <MobileButton onActivate={() => dispatch(toggleMobileMode())} />
+            {mobileModeActive && <MobileSelector cam={cameraTarget} onClose={() => dispatch(toggleMobileMode())} />}
             <HelpAndSoundButtons onShowHelp={() => setShowHelp(!showHelp)} />
             {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
         </>
