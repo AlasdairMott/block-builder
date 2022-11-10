@@ -51,7 +51,9 @@ const MobileSelector = (props: { onClose: () => void, cam: any }) => {
                         <div onClick={() => {
                             dispatch(togglePlacedPreview());
                             dispatch(gridActions.addBlock({ faceId: previewBlockIds.faceId, blockId: previewBlockIds.blockId, model: nextModel }));
-                            dispatch(modelActions.randomBlock());
+                            setTimeout(function () {
+                                dispatch(modelActions.randomBlock());
+                            }, 20);
                         }} title={""}>
                             <Check />
                         </div>
