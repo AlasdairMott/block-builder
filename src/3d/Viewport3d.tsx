@@ -8,7 +8,7 @@ import { Grid } from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
-import { ActiveTool, changeMode, togglePerspective, toggleMobileMode, togglePlacedPreview } from '../store/ui';
+import { ActiveTool, changeMode, togglePerspective, toggleMobileMode, togglePlacedPreview, toggleOrbiting } from '../store/ui';
 import { HelpAndSoundButtons, HelpModal } from "../UI/HelpAndSound";
 import Toolbar from '../UI/Toolbar';
 import { MobileSelector, MobileButton } from "../UI/MobileMode";
@@ -142,7 +142,7 @@ const Viewport3d = () => {
             <Leva hidden={window.location.hash !== '#debug'} />
             <Canvas shadows={true} onKeyDown={handleKeyPress}>
                 <color attach="background" args={[0.9, 0.9, 0.9]} />
-                <OrbitControls target={cameraTarget} />
+                <OrbitControls target={cameraTarget} onStart={() => { dispatch(toggleOrbiting()) }} onEnd={() => { dispatch(toggleOrbiting()) }} />
                 <PerspectiveCamera makeDefault={isPerspective} position={cameraLocation} fov={75} ref={perspectiveCamera} />
                 <OrthographicCamera makeDefault={!isPerspective} position={cameraLocation} zoom={75} ref={orthographicCamera} />
 

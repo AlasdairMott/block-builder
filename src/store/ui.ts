@@ -12,6 +12,7 @@ export type uiState = {
     perspective: boolean,
     mobileMode: boolean,
     placedPreview: boolean,
+    orbiting: boolean
 }
 
 const uiSlice = createSlice({
@@ -27,7 +28,7 @@ const uiSlice = createSlice({
             blockId: null,
             model: null
         },
-
+        orbiting: false
     },
     reducers: {
         changeMode: (state, action) => {
@@ -51,8 +52,11 @@ const uiSlice = createSlice({
             state.previewBlockIds.blockId = action.payload.blockId
             state.previewBlockIds.model = action.payload.model
         },
+        toggleOrbiting: (state) => {
+            state.orbiting = !state.orbiting
+        }
     }
 });
 
 export default uiSlice.reducer;
-export const { changeMode, toggleSound, togglePerspective, toggleMobileMode, togglePlacedPreview, setCurrentPreviewIds } = uiSlice.actions;
+export const { changeMode, toggleSound, togglePerspective, toggleMobileMode, togglePlacedPreview, setCurrentPreviewIds, toggleOrbiting } = uiSlice.actions;

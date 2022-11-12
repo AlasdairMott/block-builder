@@ -16,6 +16,7 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
     const mobileModeActive = useAppSelector(state => state.ui.mobileMode);
     const placedPreview = useAppSelector(state => state.ui.placedPreview);
     const previewBlockIds = useAppSelector(state => state.ui.previewBlockIds);
+    const orbiting = useAppSelector(state => state.ui.orbiting);
 
 
     const hoverPreview = useRef<Group>(null!);
@@ -23,7 +24,13 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
     const [hovered, setHover] = useState(false);
 
     const enterHandler = (e: ThreeEvent<PointerEvent>) => {
-        setHover(true);
+        if (orbiting) {
+            setHover(false);
+        }
+        else {
+            setHover(true);
+        }
+
         e.stopPropagation();
     };
 
