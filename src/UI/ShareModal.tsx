@@ -1,11 +1,8 @@
-import { MessageText, Telegram, Twitter, Pinterest, Copy, Mail, Cancel, CheckCircledOutline } from "iconoir-react";
-import { useCallback, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { toggleSound } from "../store/ui";
-import RoundButton from "../UI/RoundButton";
-import styles from "./ShareModal.module.css";
+import { Cancel, CheckCircledOutline, Copy, Mail, MessageText, Pinterest, Telegram, Twitter } from "iconoir-react";
+import { useState } from "react";
+import { useAppSelector } from "../store/hooks";
 import { encodeGridState } from "../utils/compresser";
-import { wait } from "@testing-library/user-event/dist/utils";
+import styles from "./ShareModal.module.css";
 
 export const SHAREICONPROPS = {
     width: "100%",
@@ -67,7 +64,7 @@ const ShareModal = (props: { onClose: () => void }) => {
                             <div className={styles.buttonsBox}><ShareModalButton onClick={() => handleShare("Pinterest")} title={"Pinterest"}> <Pinterest {...SHAREICONPROPS} /> </ShareModalButton></div>
                         </div>
                         <div className={styles.clipboardBox}>
-                            <input type="text" value={urlString} className={styles.url} />
+                            <input type="text" defaultValue={urlString} className={styles.url}/>
                             <div className={styles.buttonsBox}><ShareModalButton onClick={() => handleShare("Clipboard")} title={""}> <Copy {...SHAREICONPROPS} /></ShareModalButton></div>
                         </div>
                         <div className={styles.closeShareModal} onClick={props.onClose} title={""}> <Cancel color="black" strokeWidth="2px" /> </div>
