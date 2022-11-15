@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
 import { setCurrentPreviewIds, togglePlacedPreview } from "../store/ui";
 import { FaceProps } from "./Cell";
-import Model from "./Model";
+import Model, { ModelMobile } from "./Model";
 
 
 export default function Face(props: FaceProps & { blockId: string, scale: number }) {
@@ -45,21 +45,13 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
             e.stopPropagation();
         }
         else {
-            if (placedPreview) {
-                setHover(false)
-                if (props.faceId === previewBlockIds.faceId && props.blockId === previewBlockIds.blockId) {
-                    setHover(true)
-                }
-            }
-            else {
-                setHover(true)
-                dispatch(togglePlacedPreview())
-                dispatch(setCurrentPreviewIds({
-                    faceId: props.faceId,
-                    blockId: props.blockId,
-                    model: model
-                }))
-            }
+            setHover(true)
+            dispatch(togglePlacedPreview())
+            dispatch(setCurrentPreviewIds({
+                faceId: props.faceId,
+                blockId: props.blockId,
+                model: model
+            }))
             e.stopPropagation();
         }
     };
@@ -86,7 +78,7 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
             }
             <group position={props.position.clone().multiplyScalar(2)} scale={0.8} ref={hoverPreview}>
                 {hovered && !mobileModeActive && <Model {...model} wireframe={!canPlace} />}
-                {hovered && mobileModeActive && placedPreview && <Model {...model} wireframe={!canPlace} />}
+                {hovered && mobileModeActive && placedPreview && <ModelMobile {...model} wireframe={!canPlace} />}
             </group>
         </>
     )

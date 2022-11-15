@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { AddHexagon, Check, Palette, RefreshDouble, SmartphoneDevice, Cancel } from "iconoir-react";
+import { AddHexagon, Palette, RefreshDouble, SmartphoneDevice } from "iconoir-react";
 import { useDispatch } from "react-redux";
 import "../App.css";
 import Model from "../Grid/Model";
@@ -8,7 +8,6 @@ import { modelActions } from "../store/model";
 import styles from "./MobileMode.module.css";
 import RoundButton from "./RoundButton";
 import { ICONPROPS, ToolbarCommandButton } from "./ToolbarButton";
-import { gridActions } from '../store/grid';
 import { toggleMobileMode, togglePlacedPreview } from "../store/ui";
 
 
@@ -26,8 +25,6 @@ const MobileButton = (props: { onActivate: () => void }) => {
 
 const MobileSelector = (props: { onClose: () => void }) => {
     const nextModel = useAppSelector(state => state.model.model);
-    const placedPreview = useAppSelector(state => state.ui.placedPreview);
-    const previewBlockIds = useAppSelector(state => state.ui.previewBlockIds);
 
     const dispatch = useDispatch();
     return (
@@ -45,27 +42,7 @@ const MobileSelector = (props: { onClose: () => void }) => {
                 </ToolbarCommandButton>
                 <ToolbarCommandButton onClick={() => { dispatch(modelActions.nextColor()) }} title={"rotate"}><Palette {...ICONPROPS} />
                 </ToolbarCommandButton>
-                {placedPreview
-                    ?
-                    <div className={styles.confirmPreview}>
-                        <div onClick={() => {
-                            dispatch(togglePlacedPreview());
-                            dispatch(gridActions.addBlock({ faceId: previewBlockIds.faceId, blockId: previewBlockIds.blockId, model: nextModel }));
-                            setTimeout(function () {
-                                dispatch(modelActions.randomBlock());
-                            }, 100);
-                        }} title={""}>
-                            <Check />
-                        </div>
-                        <div onClick={() => {
-                            dispatch(togglePlacedPreview());
-                        }} title={""}><Cancel />
-                        </div>
-                    </div>
-                    : null
-                }
             </div>
-
         </div>
     );
 };
