@@ -24,13 +24,7 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
     const [hovered, setHover] = useState(false);
 
     const enterHandler = (e: ThreeEvent<PointerEvent>) => {
-        if (orbiting) {
-            setHover(false);
-        }
-        else {
-            setHover(true);
-        }
-
+        orbiting ? setHover(false) : setHover(true);
         e.stopPropagation();
     };
 
@@ -91,10 +85,9 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
                 : <Plane {...props} onClick={clickHandler} visible={false} />
             }
             <group position={props.position.clone().multiplyScalar(2)} scale={0.8} ref={hoverPreview}>
-                {hovered && <Model {...model} wireframe={!canPlace} />}
+                {hovered && !mobileModeActive && <Model {...model} wireframe={!canPlace} />}
                 {hovered && mobileModeActive && placedPreview && <Model {...model} wireframe={!canPlace} />}
             </group>
-
         </>
     )
 };

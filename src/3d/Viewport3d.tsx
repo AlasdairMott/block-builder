@@ -11,7 +11,7 @@ import { modelActions } from "../store/model";
 import { ActiveTool, changeMode, togglePerspective, toggleMobileMode, togglePlacedPreview, toggleOrbiting } from '../store/ui';
 import { HelpAndSoundButtons, HelpModal } from "../UI/HelpAndSound";
 import Toolbar from '../UI/Toolbar';
-import { MobileSelector, MobileButton } from "../UI/MobileMode";
+import { MobileTools } from "../UI/MobileMode";
 import { decodeGridState, encodeGridState } from "../utils/compresser";
 import Serializer from "../utils/serialization";
 
@@ -161,8 +161,7 @@ const Viewport3d = () => {
                 </Plane>
             </Canvas>
             <Toolbar onZoomExtents={zoomExtents} onTogglePerspective={handleTogglePerspective} onNewFile={handleNewFile}></Toolbar>
-            <MobileButton onActivate={() => dispatch(toggleMobileMode())} />
-            {mobileModeActive && <MobileSelector cam={cameraTarget} onClose={() => dispatch(toggleMobileMode())} />}
+            <MobileTools />
             <HelpAndSoundButtons onShowHelp={() => setShowHelp(!showHelp)} />
             {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
         </>

@@ -30,11 +30,10 @@ const Model = ({ name, rotation, color, ...props }) => {
 };
 
 const ModelAnimated = ({ name, rotation, color, ...props }) => {
-    
     const transition = useTransition(true, {
         from: { scale: [0.8, 0.8, 0.8] },
         enter: { scale: [1, 1, 1] },
-        leave: () => { console.log("leaving"); return {scale: [0.1, 0.1, 0.1]} },
+        leave: () => { console.log("leaving"); return { scale: [0.1, 0.1, 0.1] } },
         config: { mass: 1, tension: 2000, friction: 80 },
     });
 
