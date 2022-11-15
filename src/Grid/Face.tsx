@@ -12,22 +12,28 @@ import Model from "./Model";
 export default function Face(props: FaceProps & { blockId: string, scale: number, orbitControls: RefObject<OrbitControls> }) {
     const dispatch = useAppDispatch();
     const model = useAppSelector(state => state.model.model);
-    
-    const [orbiting, setOrbiting] = useState(false);
 
+    const orbiting = useRef(false);
     useEffect(() => {
         if (props.orbitControls.current) {
-            props.orbitControls.current.addEventListener('start', () => setOrbiting(true));
-            props.orbitControls.current.addEventListener('end', () => setOrbiting(false));
+            // when the initial state is created the controls are not yet initialized
+            // that means orbiting will be false when it should be true
+            // try to attach to the controls in 100ms fixes this
+            setTimeout(() => {
+                if (props.orbitControls.current) {
+                    props.orbitControls.current.addEventListener('start', () => orbiting.current = true);
+                    props.orbitControls.current.addEventListener('end', () => orbiting.current = false);
+                }
+            }, 100);
         }
-    }, [orbiting, props.orbitControls]);
+    }, [props.orbitControls]);
 
     const hoverPreview = useRef<Group>(null!);
 
     const [hovered, setHover] = useState(false);
 
     const enterHandler = (e: ThreeEvent<PointerEvent>) => {
-        orbiting ? setHover(false) : setHover(true);
+        orbiting.current ? setHover(false) : setHover(true);
         e.stopPropagation();
     };
 
@@ -37,18 +43,15 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
     };
 
     const clickHandler = (e: ThreeEvent<MouseEvent>) => {
-        if (e.delta > 1) {
-            e.stopPropagation();
-            return;
+        if (e.delta <= 1) {
+            setHover(false);
+            dispatch(gridActions.addBlock({
+                faceId: props.faceId,
+                blockId: props.blockId,
+                model: model
+            }));
+            dispatch(modelActions.randomBlock());
         }
-
-        setHover(false);
-        dispatch(gridActions.addBlock({
-            faceId: props.faceId,
-            blockId: props.blockId,
-            model: model
-        }));
-        dispatch(modelActions.randomBlock());
 
         e.stopPropagation();
     };
