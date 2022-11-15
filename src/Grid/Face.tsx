@@ -1,23 +1,33 @@
 import { Plane } from "@react-three/drei";
 import { ThreeEvent, useFrame } from '@react-three/fiber';
-import { useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import { Group } from "three";
+import { OrbitControls } from 'three-stdlib';
 import { getNeighbourId, gridActions } from '../store/grid';
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
 import { FaceProps } from "./Cell";
 import Model from "./Model";
 
-export default function Face(props: FaceProps & { blockId: string, scale: number }) {
+export default function Face(props: FaceProps & { blockId: string, scale: number, orbitControls: RefObject<OrbitControls> }) {
     const dispatch = useAppDispatch();
     const model = useAppSelector(state => state.model.model);
+    
+    const [orbiting, setOrbiting] = useState(false);
+
+    useEffect(() => {
+        if (props.orbitControls.current) {
+            props.orbitControls.current.addEventListener('start', () => setOrbiting(true));
+            props.orbitControls.current.addEventListener('end', () => setOrbiting(false));
+        }
+    }, [orbiting, props.orbitControls]);
 
     const hoverPreview = useRef<Group>(null!);
 
     const [hovered, setHover] = useState(false);
 
     const enterHandler = (e: ThreeEvent<PointerEvent>) => {
-        setHover(true);
+        orbiting ? setHover(false) : setHover(true);
         e.stopPropagation();
     };
 
@@ -27,6 +37,11 @@ export default function Face(props: FaceProps & { blockId: string, scale: number
     };
 
     const clickHandler = (e: ThreeEvent<MouseEvent>) => {
+        if (e.delta > 1) {
+            e.stopPropagation();
+            return;
+        }
+
         setHover(false);
         dispatch(gridActions.addBlock({
             faceId: props.faceId,

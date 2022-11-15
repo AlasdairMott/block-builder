@@ -1,8 +1,9 @@
 import { Edges } from '@react-three/drei';
 import { ThreeEvent } from '@react-three/fiber';
-import { useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { Euler } from 'three';
+import { OrbitControls } from 'three-stdlib';
 import { gridActions } from '../store/grid';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { CellProps } from '../store/types';
@@ -25,7 +26,7 @@ export enum Direction {
     yNeg = 'yNeg'
 }
 
-export function Cell(props: CellProps) {
+export function Cell(props: CellProps & { orbitControls: RefObject<OrbitControls> }) {
     const dispatch = useAppDispatch();
 
     const mode = useAppSelector(state => state.ui.mode);
@@ -77,7 +78,9 @@ export function Cell(props: CellProps) {
                         blockId={props.blockId}
                         scale={F * 2}
                         position={face.position}
-                        rotation={face.rotation} />
+                        rotation={face.rotation} 
+                        orbitControls={props.orbitControls}
+                        />
                     )
                 })
             }
