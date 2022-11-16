@@ -1,9 +1,10 @@
-import { OrbitControls, OrbitControlsProps, OrthographicCamera, PerspectiveCamera, Plane } from "@react-three/drei";
+import { OrbitControls as Orbit, OrthographicCamera, PerspectiveCamera, Plane } from "@react-three/drei";
 import { Canvas, Vector3 } from "@react-three/fiber";
 import { button, Leva, useControls } from 'leva';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActionCreators } from 'redux-undo';
-import { Camera, GridHelper } from "three";
+import { Camera } from "three";
+import { OrbitControls } from 'three-stdlib';
 import { Grid } from '../Grid/Grid';
 import { getGridCentroid, gridActions } from "../store/grid";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -84,6 +85,7 @@ const Viewport3d = () => {
 
     const perspectiveCamera = useRef<Camera>(null);
     const orthographicCamera = useRef<Camera>(null);
+    const orbitControls = useRef<OrbitControls>(null);
 
     const zoomExtents = useCallback(() => {
 
@@ -138,7 +140,7 @@ const Viewport3d = () => {
             <Leva hidden={window.location.hash !== '#debug'} />
             <Canvas shadows={true} onKeyDown={handleKeyPress}>
                 <color attach="background" args={[0.9, 0.9, 0.9]} />
-                <OrbitControls target={cameraTarget} />
+                <Orbit target={cameraTarget} ref={orbitControls}/>
                 <PerspectiveCamera makeDefault={isPerspective} position={cameraLocation} fov={75} ref={perspectiveCamera} />
                 <OrthographicCamera makeDefault={!isPerspective} position={cameraLocation} zoom={75} ref={orthographicCamera} />
 
@@ -151,7 +153,7 @@ const Viewport3d = () => {
                     shadow-camera-top={10}
                     shadow-camera-bottom={-10} intensity={0.8} />
 
-                <Grid />
+                <Grid orbitControls={orbitControls}/>
                 <Plane receiveShadow={true} scale={100} rotation-x={-Math.PI * 0.5} position-y={-0.5}>
                     <shadowMaterial opacity={0.1} />
                 </Plane>
