@@ -10,6 +10,9 @@ export type uiState = {
     mode: ActiveTool,
     muted: boolean,
     perspective: boolean,
+    mobileMode: boolean,
+    placedPreview: boolean,
+    orbiting: boolean
 }
 
 const uiSlice = createSlice({
@@ -18,6 +21,14 @@ const uiSlice = createSlice({
         mode: ActiveTool.Add,
         muted: false,
         perspective: false,
+        mobileMode: false,
+        placedPreview: false,
+        previewBlockIds: {
+            faceId: null,
+            blockId: null,
+            model: null
+        },
+        orbiting: false
     },
     reducers: {
         changeMode: (state, action) => {
@@ -29,9 +40,23 @@ const uiSlice = createSlice({
         },
         togglePerspective: (state) => {
             state.perspective = !state.perspective;
+        },
+        toggleMobileMode: (state) => {
+            state.mobileMode = !state.mobileMode;
+        },
+        togglePlacedPreview: (state) => {
+            state.placedPreview = !state.placedPreview;
+        },
+        setCurrentPreviewIds: (state, action) => {
+            state.previewBlockIds.faceId = action.payload.faceId
+            state.previewBlockIds.blockId = action.payload.blockId
+            state.previewBlockIds.model = action.payload.model
+        },
+        toggleOrbiting: (state) => {
+            state.orbiting = !state.orbiting
         }
     }
 });
 
 export default uiSlice.reducer;
-export const { changeMode, toggleSound, togglePerspective } = uiSlice.actions;
+export const { changeMode, toggleSound, togglePerspective, toggleMobileMode, togglePlacedPreview, setCurrentPreviewIds, toggleOrbiting } = uiSlice.actions;

@@ -3,25 +3,29 @@ import { AddHexagon, Palette, RefreshDouble, SmartphoneDevice } from "iconoir-re
 import { useDispatch } from "react-redux";
 import "../App.css";
 import Model from "../Grid/Model";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { modelActions } from "../store/model";
 import styles from "./MobileMode.module.css";
 import RoundButton from "./RoundButton";
 import { ICONPROPS, ToolbarCommandButton } from "./ToolbarButton";
+import { toggleMobileMode, togglePlacedPreview } from "../store/ui";
+
 
 const MobileButton = (props: { onActivate: () => void }) => {
-
+    const dispatch = useDispatch();
+    const placedPreview = useAppSelector(state => state.ui.placedPreview);
     return (
-        <div className={styles.mobileModeButton}>
+        <div className={styles.mobileModeButton} onClick={() => { if (placedPreview) { dispatch(togglePlacedPreview()) } }}>
             <RoundButton onClick={props.onActivate}>
                 <SmartphoneDevice {...ICONPROPS} />
             </RoundButton>
-        </div>
+        </div >
     )
 }
 
-const MobileSelector = (props: { onClose: () => void, cam: any }) => {
+const MobileSelector = (props: { onClose: () => void }) => {
     const nextModel = useAppSelector(state => state.model.model);
+
     const dispatch = useDispatch();
     return (
         <div className={styles.mobileSelector}>
@@ -43,4 +47,15 @@ const MobileSelector = (props: { onClose: () => void, cam: any }) => {
     );
 };
 
-export { MobileButton, MobileSelector };
+const MobileTools = () => {
+    const dispatch = useAppDispatch();
+    const mobileModeActive = useAppSelector(state => state.ui.mobileMode);
+    return (
+        <>
+            <MobileButton onActivate={() => dispatch(toggleMobileMode())} />
+            {mobileModeActive && <MobileSelector onClose={() => dispatch(toggleMobileMode())} />}
+        </>
+    )
+}
+
+export { MobileTools };
